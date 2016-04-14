@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import se.nylander.webscraper.config.ScraperConstants;
 import se.nylander.webscraper.model.Shop;
 import se.nylander.webscraper.model.TradeItem;
@@ -30,11 +31,13 @@ public class ForumThreadParser {
     private static Logger log = LoggerFactory.getLogger(ForumThreadParser.class);
 
     @Autowired
+    @Qualifier("jsonParser")
     private JsonParser jsonParser;
 
     private String currentLeague;
 
     @Autowired
+    @Qualifier("shopService")
     private ShopService shopService;
 
     public void setCurrentLeague(String currentLeague) {
@@ -69,8 +72,11 @@ public class ForumThreadParser {
 
             dirtyJson = htmlBody
                        .select("script")
-                       .get(10)
-                       .toString();
+                       .stream()
+                       .map(script -> script.toString())
+                       .filter(data -> data.contains("DeferredItemRenderer"))
+                       .findFirst()
+                       .get();
 
         } catch (Exception e) {
             throw e;

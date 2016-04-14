@@ -5,6 +5,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import se.nylander.webscraper.config.ScraperConstants;
 import se.nylander.webscraper.model.Shop;
 import se.nylander.webscraper.parser.jsoup.util.DocUtil;
@@ -26,9 +27,11 @@ public class ForumLeagueParser {
     private static Logger log = LoggerFactory.getLogger(ForumLeagueParser.class);
 
     @Autowired
+    @Qualifier("forumThreadParser")
     private ForumThreadParser forumThreadParser;
 
     @Autowired
+    @Qualifier("shopService")
     private ShopService shopService;
 
     public ForumLeagueParser(){}
@@ -101,7 +104,7 @@ public class ForumLeagueParser {
                             indexedShops.add(forumThreadParser.readForumLinksShops(shopLink));
 
                         } catch (Exception e) {
-                            log.warn("Couldent parse/connect to Thread: " + ScraperConstants.URL + shopLink + "\n");
+                            log.warn("Couldent parse/connect to Thread: " + ScraperConstants.URL + shopLink + "\n", e);
                         }
                     }
 

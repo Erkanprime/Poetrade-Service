@@ -32,5 +32,7 @@ public final class ScraperConstants {
     public static final String STANDARD_HARDCORE_LEAGUE = "Hardcore Trading - Shops";
     public static final String STANDARD_LEAGUE = "Standard Trading - Shops";
 
+    public static final String EXTRACT_JSON_REGEX = "require\\(\\[\\\"PoE\\/Item\\/DeferredItemRenderer\\\"\\], function\\(R\\) \\{ \\(new R\\((.*?)\\)\\)\\.run\\(\\)\\; \\}\\)\\;";
+
 
 }

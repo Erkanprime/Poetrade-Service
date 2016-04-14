@@ -19,8 +19,9 @@ public class ShopDaoImp implements ShopDao{
 
     @Override
     public void save(Shop shop) {
-        em.persist(shop);
 
+        em.persist(shop);
+      //  em.getEntityManagerFactory().getCache().evictAll();
     }
 
     @Override
@@ -43,8 +44,9 @@ public class ShopDaoImp implements ShopDao{
     }
 
     @Override
-    public Shop update(Shop shop) {
-        return em.merge(shop);
+    public void update(Shop shop) {
+        em.merge(shop);
+
     }
 
 

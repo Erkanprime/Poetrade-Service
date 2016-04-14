@@ -13,5 +13,5 @@ public interface ShopDao {
 
     Shop getShopByThreadAndLeague(String league, String thread);
 
-    Shop update(Shop shop);
+    void update(Shop shop);
 }
