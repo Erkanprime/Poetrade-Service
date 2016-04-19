@@ -1,9 +1,8 @@
 package se.nylander.webscraper.parser.jsoup;
 
+import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import se.nylander.webscraper.config.ScraperConstants;
@@ -24,7 +23,7 @@ public class ForumLeagueParser {
 
     private HashMap<String, String> forumLinks = new HashMap<>();
 
-    private static Logger log = LoggerFactory.getLogger(ForumLeagueParser.class);
+    private static Logger log = Logger.getLogger(ForumLeagueParser.class);
 
     @Autowired
     @Qualifier("forumThreadParser")

@@ -20,7 +20,7 @@ public class DocUtil {
     public static Document getDocument(String url) throws IOException{
         // Vänta så inte
         try {
-            Thread.sleep(1500);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

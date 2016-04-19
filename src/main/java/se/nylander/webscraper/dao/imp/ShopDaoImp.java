@@ -29,8 +29,7 @@ public class ShopDaoImp implements ShopDao{
         Query q = em.createQuery("Select s from Shop s where s.league = :league order by s.timeOfIndexed desc", Shop.class);
         q.setParameter("league", league);
         q.setMaxResults(1);
-        Shop shop = (Shop) q.getResultList().get(0);
-        return shop;
+        return (Shop) q.getResultList().get(0);
     }
 
     @Override
@@ -39,14 +38,12 @@ public class ShopDaoImp implements ShopDao{
         q.setParameter("league", league);
         q.setParameter("threadLink", thread);
         q.setMaxResults(1);
-        Shop shop = (Shop) q.getResultList().get(0);
-        return shop;
+        return (Shop) q.getResultList().get(0);
     }
 
     @Override
     public void update(Shop shop) {
         em.merge(shop);
-
     }
 
 

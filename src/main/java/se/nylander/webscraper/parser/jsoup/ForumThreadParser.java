@@ -1,12 +1,11 @@
 package se.nylander.webscraper.parser.jsoup;
 
+import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import se.nylander.webscraper.config.ScraperConstants;
@@ -28,7 +27,7 @@ import java.util.stream.Collectors;
  */
 public class ForumThreadParser {
 
-    private static Logger log = LoggerFactory.getLogger(ForumThreadParser.class);
+    private static Logger log = Logger.getLogger(ForumThreadParser.class);
 
     @Autowired
     @Qualifier("jsonParser")
@@ -92,10 +91,10 @@ public class ForumThreadParser {
             currentShop.setTradeItems(findTradeItemPrices(tradeItems.get(), htmlBody));
 
         }
-        /*
+
         log.info("Fetched shop: " + currentShop.getShopName() + " Owner: " + currentShop.getShopOwner()
                 + "Last edited: " + currentShop.getLastEdited() + " Number of items: " + currentShop.getTradeItems().size());
-        */
+
 
         shopService.saveOrUpdate(currentShop);
         return currentShop;

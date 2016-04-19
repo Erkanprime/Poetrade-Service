@@ -29,6 +29,13 @@
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.generate_statistics">false</prop>
                 <prop key="hibernate.use_sql_comments">false</prop>
+                <prop key="hibernate.connection.release_mode">after_transaction</prop>
+                <prop key="hibernate.c3p0.acquire_increment">1</prop>
+                <prop key="hibernate.c3p0.idle_test_period">100</prop> <!-- seconds -->
+                <prop key="hibernate.c3p0.max_size">5</prop>
+                <prop key="hibernate.c3p0.max_statements">0</prop>
+                <prop key="hibernate.c3p0.min_size">1</prop>
+                <prop key="hibernate.c3p0.timeout">100</prop> <!-- seconds -->
             </props>
         </property>
     </bean>
@@ -38,6 +45,9 @@
         <property name="url" value="jdbc:mysql://localhost:3306/webscraper" />
         <property name="username" value="root" />
         <property name="password" value="root" />
+        <property name="connectionProperties">
+            <value>useSSL=false</value>
+        </property>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
