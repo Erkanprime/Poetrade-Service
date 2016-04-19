@@ -7,7 +7,7 @@ public final class ScraperConstants {
 
     public static final String SHOP_POSTED_BY = "posted-by";
     public static final String ITEM_FRAGMENT = "itemFragment";
-    public static final String MOD_REGEX = "^[+-]?\\d+|\\d+"; // %?
+    public static final String MOD_REGEX = "^\\d+\\.\\d+[%]|^[+-]?\\d+|\\d+";
 
     public static final String ITEM_CORRUPTED = "corrupted";
     public static final String ITEM_TYPE = "typeLine";
