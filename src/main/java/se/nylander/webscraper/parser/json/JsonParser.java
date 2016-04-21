@@ -78,25 +78,25 @@ public class JsonParser {
 
     // Check if typeline contains >>
     private static String parseTypeLine(JSONObject object) {
-        try {
-            String typeLine = object.getString(ScraperConstants.ITEM_TYPE);
-            return typeLine.contains(">>") ? typeLine.substring(typeLine.lastIndexOf(">>") + 2) : typeLine;
-        } catch (JSONException e) {
-            return ScraperConstants.ITEM_UNDEFINED;
-        }
+        Optional<String> type = Optional.ofNullable(object.optString(ScraperConstants.ITEM_TYPE));
+
+        Pattern pattern = Pattern.compile(ScraperConstants.NAME_TYPE_REGEX);
+        Matcher matcher = pattern.matcher(type.get());
+        return type.isPresent() && matcher.find() ?
+                type.get().substring(matcher.start(), matcher.end()) : "";
     }
 
     // Check if name is empty or contains >>, if yes it returns typeline
     private static String parseName(JSONObject object) {
-        String name;
-        try {
-            name = object.getString(ScraperConstants.ITEM_NAME);
-            return name.contains(">>") ? name.substring(name.lastIndexOf(">>") + 2) : name;
+        Optional<String> name = Optional.ofNullable(object.optString(ScraperConstants.ITEM_NAME));
 
-        } catch (JSONException e) {
-            name = parseTypeLine(object);
-        }
-        return name;
+
+            Pattern pattern = Pattern.compile(ScraperConstants.NAME_TYPE_REGEX);
+            Matcher matcher = pattern.matcher(name.get());
+
+            return name.isPresent() && matcher.find() ?
+                    name.get().substring(matcher.start(), matcher.end()) : "";
+
     }
 
     private static TradeItem parseMods(JSONObject object, TradeItem tradeItem) {
@@ -189,13 +189,13 @@ public class JsonParser {
             Matcher matcher = pattern.matcher(modName);
 
 
-            Optional<Integer> optionalMinValue = Optional.ofNullable(matcher.find()
-                    ? Integer.parseInt(modName.substring(matcher.start(), matcher.end()))
+            Optional<Double> optionalMinValue = Optional.ofNullable(matcher.find()
+                    ? Double.parseDouble(modName.substring(matcher.start(), matcher.end()))
                     : null
             );
 
-            Optional<Integer> optionalMaxValue = Optional.ofNullable(matcher.find()
-                    ? Integer.parseInt(modName.substring(matcher.start(), matcher.end()))
+            Optional<Double> optionalMaxValue = Optional.ofNullable(matcher.find()
+                    ? Double.parseDouble(modName.substring(matcher.start(), matcher.end()))
                     : optionalMinValue.isPresent()
                                       ? optionalMinValue.get()
                                       : null
@@ -216,8 +216,8 @@ public class JsonParser {
 
 
             if(existingMod.isPresent()) {
-                Integer existingModMinValue = existingMod.get().getMinValue();
-                Integer existingModMaxValue = existingMod.get().getMaxValue();
+                Double existingModMinValue = existingMod.get().getMinValue();
+                Double existingModMaxValue = existingMod.get().getMaxValue();
 
                 if(existingModMinValue != null && currentMod.getMinValue() != null) {
                     existingMod.get().setMinValue(existingModMinValue + currentMod.getMinValue());

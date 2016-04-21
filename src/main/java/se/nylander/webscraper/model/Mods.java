@@ -15,17 +15,17 @@ public class Mods {
     private Long id;
 
     @Column(name = "MIN_VALUE", nullable = true)
-    private Integer minValue;
+    private Double minValue;
 
     @Column(name = "MAX_VALUE", nullable = true)
-    private Integer maxValue;
+    private Double maxValue;
 
     @Column(name = "MOD_NAME")
     private String modName;
 
 
 
-    public Mods(String modName, Integer minValue, Integer maxValue){
+    public Mods(String modName, Double minValue, Double maxValue){
         this.modName = modName;
         this.minValue = minValue;
         this.maxValue = maxValue;
@@ -49,19 +49,19 @@ public class Mods {
         this.modName = modName;
     }
 
-    public void setMaxValue(Integer maxValue) {
+    public void setMaxValue(Double maxValue) {
         this.maxValue = maxValue;
     }
 
-    public void setMinValue(Integer minValue) {
+    public void setMinValue(Double minValue) {
         this.minValue = minValue;
     }
 
-    public Integer getMaxValue() {
+    public Double getMaxValue() {
         return maxValue;
     }
 
-    public Integer getMinValue() {
+    public Double getMinValue() {
         return minValue;
     }
 
