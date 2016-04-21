@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import se.nylander.webscraper.config.ScraperConstants;
+import se.nylander.webscraper.exception.NoItemDataException;
 import se.nylander.webscraper.model.Shop;
 import se.nylander.webscraper.model.TradeItem;
 import se.nylander.webscraper.parser.json.JsonParser;
@@ -78,7 +79,9 @@ public class ForumThreadParser {
                        .get();
 
         } catch (Exception e) {
-            throw e;
+            throw e instanceof NoSuchElementException
+                    ? new NoItemDataException("No item data present in shop")
+                    : e;
         }
 
         Shop currentShop = extractShopMetaInfo(htmlBody);

@@ -5,8 +5,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import se.nylander.webscraper.config.ScraperConstants;
 import se.nylander.webscraper.exception.JavascriptJsonFormatException;
-import se.nylander.webscraper.model.ItemSockets;
-import se.nylander.webscraper.model.Mods;
+import se.nylander.webscraper.model.ItemSocket;
+import se.nylander.webscraper.model.Mod;
+import se.nylander.webscraper.model.Property;
 import se.nylander.webscraper.model.TradeItem;
 
 import java.util.*;
@@ -123,20 +124,50 @@ public class JsonParser {
     }
 
     private static TradeItem parseProperties(JSONObject object, TradeItem tradeItem) {
-        try {
-            JSONArray properties = object.getJSONArray(ScraperConstants.ITEM_PROPERTIES);
+            JSONArray properties = object.optJSONArray(ScraperConstants.ITEM_PROPERTIES);
+            List<Property> tradeItemProperties = new ArrayList<>();
 
-            for (int i = 0; i < properties.length(); i++) {
+        if(properties != null){
+                for (int i = 0; i < properties.length(); i++) {
+                //Optional<String> value = properties.getJSONObject(i).getJSONArray("values").getJSONArray(0).toString();
+                Property property = new Property();
+                Pattern pattern = Pattern.compile(ScraperConstants.MOD_REGEX);
+                Matcher matcher;
 
-                if (!properties.getJSONObject(i).getJSONArray("values").isNull(0)) {
-                    String value = properties.getJSONObject(i).getJSONArray("values").getJSONArray(0).toString();
-                    String property = properties.getJSONObject(i).getString("name");
-                    tradeItem.setBaseProperties(property, value);
+                    Optional<JSONArray> values = Optional.ofNullable(properties.getJSONObject(i).getJSONArray("values"));
+                    Optional<String> value = Optional.ofNullable(values.isPresent() && !values.get().isNull(0)
+                            ? values.get()
+                            .getJSONArray(0).optString(0)
+                            : null
+                    );
+
+                if(value.isPresent()){
+                    matcher = pattern.matcher(value.get());
+
+                    Optional<Double> optionalMinValue = Optional.ofNullable(matcher.find()
+                            ? Double.parseDouble(value.get().substring(matcher.start(), matcher.end()))
+                            : null
+                    );
+
+                    Optional<Double> optionalMaxValue = Optional.ofNullable(matcher.find()
+                            ? Double.parseDouble(value.get().substring(matcher.start(), matcher.end()))
+                            : optionalMinValue.isPresent()
+                            ? optionalMinValue.get()
+                            : null
+                    );
+
+                    property.setMiniValue(optionalMinValue.isPresent() ? optionalMinValue.get() : null);
+                    property.setMaxiValue(optionalMaxValue.isPresent() ? optionalMaxValue.get() : null);
+
                 }
+
+                    String name = properties.getJSONObject(i).getString("name");
+                    property.setPropName(name);
+                    tradeItemProperties.add(property);
+                }
+
+               tradeItem.setProperty(tradeItemProperties);
             }
-        } catch (JSONException e) {
-            return tradeItem;
-        }
         return tradeItem;
     }
 
@@ -164,7 +195,7 @@ public class JsonParser {
     private static TradeItem parseSockets(JSONObject object, TradeItem tradeItem) {
         try {
             JSONArray sockets = object.getJSONArray(ScraperConstants.ITEM_SOCKETS);
-            Set<ItemSockets> socketsAndLinks = new HashSet<>();
+            Set<ItemSocket> socketsAndLinks = new HashSet<>();
 
             for (int i = 0; i < sockets.length(); i++) {
                 JSONObject socket = sockets.getJSONObject(i);
@@ -180,7 +211,7 @@ public class JsonParser {
     }
 
     private static TradeItem manageModProperties(JSONArray mods , TradeItem tradeItem) {
-        Set<Mods> modsList = new HashSet<>();
+        Set<Mod> modList = new HashSet<>();
 
         for (int i = 0; i < mods.length(); i++) {
 
@@ -203,36 +234,36 @@ public class JsonParser {
 
             //Ta bort nummer för att göra mod-namnet generiskt
             modName = modName.replaceAll("(\\d+)","#");
-            final Mods currentMod = new Mods(modName, optionalMinValue.isPresent()
+            final Mod currentMod = new Mod(modName, optionalMinValue.isPresent()
                                             ? optionalMinValue.get()
                                             : null
                                         , optionalMaxValue.isPresent()
                                             ? optionalMaxValue.get()
                                             : null);
 
-            Optional<Mods> existingMod = modsList.stream()
+            Optional<Mod> existingMod = modList.stream()
                                                  .filter(mod -> mod.equals(currentMod))
                                                  .findFirst();
 
 
             if(existingMod.isPresent()) {
-                Double existingModMinValue = existingMod.get().getMinValue();
-                Double existingModMaxValue = existingMod.get().getMaxValue();
+                Double existingModMinValue = existingMod.get().getMiniValue();
+                Double existingModMaxValue = existingMod.get().getMaxiValue();
 
-                if(existingModMinValue != null && currentMod.getMinValue() != null) {
-                    existingMod.get().setMinValue(existingModMinValue + currentMod.getMinValue());
+                if(existingModMinValue != null && currentMod.getMiniValue() != null) {
+                    existingMod.get().setMiniValue(existingModMinValue + currentMod.getMiniValue());
                 }
-                if(existingModMaxValue != null && currentMod.getMaxValue() != null){
-                    existingMod.get().setMaxValue(existingModMaxValue + currentMod.getMaxValue());
+                if(existingModMaxValue != null && currentMod.getMaxiValue() != null){
+                    existingMod.get().setMaxiValue(existingModMaxValue + currentMod.getMaxiValue());
                 }
 
-                modsList.add(existingMod.get());
+                modList.add(existingMod.get());
             } else {
-                modsList.add(currentMod);
+                modList.add(currentMod);
             }
 
         }
-        tradeItem.setMods(modsList);
+        tradeItem.setMod(modList);
         return tradeItem;
     }
 

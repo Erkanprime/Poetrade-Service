@@ -7,31 +7,28 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "MODS")
-public class Mods {
+public class Mod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "MOD_ID")
     private Long id;
 
-    @Column(name = "MIN_VALUE", nullable = true)
-    private Double minValue;
+    @Column
+    private Double miniValue;
 
-    @Column(name = "MAX_VALUE", nullable = true)
-    private Double maxValue;
+    @Column
+    private Double maxiValue;
 
-    @Column(name = "MOD_NAME")
+    @Column
     private String modName;
 
-
-
-    public Mods(String modName, Double minValue, Double maxValue){
+    public Mod(String modName, Double miniValue, Double maxiValue){
         this.modName = modName;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
+        this.miniValue = miniValue;
+        this.maxiValue = maxiValue;
     }
 
-    public Mods(){}
+    public Mod(){}
 
     public Long getId() {
         return id;
@@ -49,26 +46,26 @@ public class Mods {
         this.modName = modName;
     }
 
-    public void setMaxValue(Double maxValue) {
-        this.maxValue = maxValue;
+    public void setMaxiValue(Double maxiValue) {
+        this.maxiValue = maxiValue;
     }
 
-    public void setMinValue(Double minValue) {
-        this.minValue = minValue;
+    public void setMiniValue(Double miniValue) {
+        this.miniValue = miniValue;
     }
 
-    public Double getMaxValue() {
-        return maxValue;
+    public Double getMaxiValue() {
+        return maxiValue;
     }
 
-    public Double getMinValue() {
-        return minValue;
+    public Double getMiniValue() {
+        return miniValue;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Mods){
-            Mods mod = (Mods) obj;
+        if(obj instanceof Mod){
+            Mod mod = (Mod) obj;
             return this.modName.equals(mod.modName);
         }
         return false;

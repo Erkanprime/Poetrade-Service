@@ -7,11 +7,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "ITEMSOCKETS")
-public class ItemSockets {
+public class ItemSocket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ITEMSOCKET_ID", nullable = false)
     private Long id;
 
     @Column(name = "COLOUR", nullable = true)
@@ -20,12 +19,12 @@ public class ItemSockets {
     @Column(name = "GROUP_ID", nullable = true)
     private Integer groupId;
 
-    public ItemSockets(String color, Integer groupId){
+    public ItemSocket(String color, Integer groupId){
         this.colour = color;
         this.groupId = groupId;
     }
 
-    public ItemSockets() {
+    public ItemSocket() {
     }
 
 

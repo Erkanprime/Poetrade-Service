@@ -10,7 +10,7 @@ import java.util.List;
  * Created by erik.nylander on 2016-02-22.
  */
 @Entity
-@Table(name = "SHOP")
+@Table(name = "SHOPS")
 public class Shop implements Serializable{
 
 

@@ -8,7 +8,7 @@ import java.util.*;
  * Created by erik.nylander on 2016-02-19.
  */
 @Entity
-@Table(name = "TRADEITEM")
+@Table(name = "TRADEITEMS")
 public class TradeItem implements Serializable{
 
     @Id
@@ -30,10 +30,13 @@ public class TradeItem implements Serializable{
     private Integer levelRequirment;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Mods> mods = new HashSet<>();
+    private Set<Mod> mod = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemSockets> itemSockets = new ArrayList<>();
+    private List<ItemSocket> itemSockets = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Property> property = new ArrayList<>();
 
     @Column(name = "LEAGUE")
     private String league;
@@ -49,9 +52,6 @@ public class TradeItem implements Serializable{
 
     @Column(name = "NAME")
     private String name;
-
-    @ElementCollection
-    private Map<String, String> baseProperties = new HashMap<>();
 
     @Column(name = "PRICE", nullable = true)
     private String price;
@@ -84,15 +84,15 @@ public class TradeItem implements Serializable{
         this.levelRequirment = levelRequirment;
     }
 
-    public List<ItemSockets> getItemSockets() {
+    public List<ItemSocket> getItemSockets() {
         return itemSockets;
     }
 
     public void addItemSocket(Integer groupId, String colour) {
-        this.itemSockets.add(new ItemSockets(colour, groupId));
+        this.itemSockets.add(new ItemSocket(colour, groupId));
     }
 
-    public void setItemSockets(List<ItemSockets> itemSockets) {
+    public void setItemSockets(List<ItemSocket> itemSockets) {
         this.itemSockets = itemSockets;
     }
 
@@ -136,14 +136,6 @@ public class TradeItem implements Serializable{
         this.name = name;
     }
 
-    public Map<String, String> getBaseProperties() {
-        return baseProperties;
-    }
-
-    public void setBaseProperties(String property, String value) {
-        this.baseProperties.put(property, value);
-    }
-
     public Shop getShop() {
         return shop;
     }
@@ -160,16 +152,20 @@ public class TradeItem implements Serializable{
         this.id = id;
     }
 
-    public void setMods(Set<Mods> mods) {
-        this.mods = mods;
+    public void setMod(Set<Mod> mods) {
+        this.mod = mods;
     }
 
-    public Set<Mods> getMods() {
-        return mods;
+    public Set<Mod> getMods() {
+        return mod;
     }
 
-    public void addMod(String key, Integer value) {
+    public List<Property> getProperty() {
+        return property;
+    }
 
+    public void setProperty(List<Property> property) {
+        this.property = property;
     }
 
     @Override
@@ -184,7 +180,6 @@ public class TradeItem implements Serializable{
                 ",\n icon='" + icon + '\'' +
                 ", identified=" + identified +
                 ", name='" + name + '\'' +
-                ",\n baseProperties=" + baseProperties +
                 ", price='" + price + '\'' +
                 '}' +
                 "\n";
