@@ -22,12 +22,28 @@ public class Property {
     @Column
     private Double maxiValue;
 
+    @Column
+    private String textValue;
+
+    @Column
+    private Boolean isNumberValue;
+
     public Property(){}
 
-    public Property(String propName, Double miniValue, Double maxiValue){
-        this.propName = propName;
-        this.miniValue = miniValue;
-        this.maxiValue = maxiValue;
+    public Boolean getNumberValue() {
+        return isNumberValue;
+    }
+
+    public void setNumberValue(Boolean numberValue) {
+        isNumberValue = numberValue;
+    }
+
+    public String getTextValue() {
+        return textValue;
+    }
+
+    public void setTextValue(String textValue) {
+        this.textValue = textValue;
     }
 
     public Long getId() {

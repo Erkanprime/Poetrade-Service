@@ -131,8 +131,7 @@ public class JsonParser {
                 for (int i = 0; i < properties.length(); i++) {
                 //Optional<String> value = properties.getJSONObject(i).getJSONArray("values").getJSONArray(0).toString();
                 Property property = new Property();
-                Pattern pattern = Pattern.compile(ScraperConstants.MOD_REGEX);
-                Matcher matcher;
+
 
                     Optional<JSONArray> values = Optional.ofNullable(properties.getJSONObject(i).getJSONArray("values"));
                     Optional<String> value = Optional.ofNullable(values.isPresent() && !values.get().isNull(0)
@@ -142,7 +141,8 @@ public class JsonParser {
                     );
 
                 if(value.isPresent()){
-                    matcher = pattern.matcher(value.get());
+                    Pattern pattern = Pattern.compile(ScraperConstants.MOD_REGEX);
+                    Matcher matcher = pattern.matcher(value.get());
 
                     Optional<Double> optionalMinValue = Optional.ofNullable(matcher.find()
                             ? Double.parseDouble(value.get().substring(matcher.start(), matcher.end()))
@@ -158,6 +158,8 @@ public class JsonParser {
 
                     property.setMiniValue(optionalMinValue.isPresent() ? optionalMinValue.get() : null);
                     property.setMaxiValue(optionalMaxValue.isPresent() ? optionalMaxValue.get() : null);
+                    property.setNumberValue(optionalMinValue.isPresent() && optionalMaxValue.isPresent());
+                    property.setTextValue(!property.getNumberValue() ? value.get() : null);
 
                 }
 
@@ -199,9 +201,24 @@ public class JsonParser {
 
             for (int i = 0; i < sockets.length(); i++) {
                 JSONObject socket = sockets.getJSONObject(i);
-                //TODO: Struntar i socket färg för tillfället
                 Integer socketGroup = socket.getInt("group");
-                tradeItem.addItemSocket(socketGroup, "");
+                String socketColor;
+
+                switch (socket.getString("attr")){
+                case "D":
+                    socketColor = "Green";
+                    break;
+                case "I":
+                    socketColor = "Blue";
+                    break;
+                case "S":
+                    socketColor = "Red";
+                    break;
+                default:
+                    socketColor = "White";
+                    break;
+                }
+                tradeItem.addItemSocket(socketGroup, socketColor);
 
             }
         } catch (JSONException e) {
