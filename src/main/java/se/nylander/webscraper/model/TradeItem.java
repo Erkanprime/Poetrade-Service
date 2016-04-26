@@ -56,6 +56,13 @@ public class TradeItem implements Serializable{
     @Column(name = "PRICE", nullable = true)
     private String price;
 
+
+    public TradeItem(String league, String name) {
+        this.league = league;
+        this.name = name;
+    }
+    public TradeItem(){}
+
     public String getPrice() { return price; }
 
     public void setPrice(String price) { this.price = price; }

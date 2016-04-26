@@ -1,17 +1,35 @@
 package se.nylander.webscraper.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import se.nylander.webscraper.model.Shop;
+import se.nylander.webscraper.model.TradeItem;
+import se.nylander.webscraper.model.request.TradeItemRequest;
 
-/**
- * Created by Cody on 2016-04-13.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Controller
-@RequestMapping("/home")
 public class TestController {
 
-    @RequestMapping("/test")
-    public String test(){
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @ResponseBody
+    public List<TradeItem> search(@RequestBody TradeItemRequest tradeItemRequest){
+        List<TradeItem> result = new ArrayList<>();
+        result.add(new TradeItem(tradeItemRequest.getLeague(),tradeItemRequest.getName()));
+        return result;
+    }
+
+    @RequestMapping("/")
+    public String home() {
         return "index";
     }
+
 }

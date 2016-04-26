@@ -161,6 +161,8 @@ public class JsonParser {
                     property.setNumberValue(optionalMinValue.isPresent() && optionalMaxValue.isPresent());
                     property.setTextValue(!property.getNumberValue() ? value.get() : null);
 
+                }else {
+                    property.setNumberValue(false);
                 }
 
                     String name = properties.getJSONObject(i).getString("name");

@@ -11,13 +11,6 @@
     <!-- Enable annotation-based Spring MVC controllers (eg: @Controller annotation) -->
     <mvc:annotation-driven/>
 
-
-    <!-- Resolve view name into jsp file located on /WEB-INF -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
-
     <!-- MySQL Datasource with Commons DBCP connection pooling -->
     <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
