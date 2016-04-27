@@ -10,13 +10,30 @@ public class TradeItemRequest {
     private String league;
     private String name;
     private String type;
-    private Integer minLevel;
-    private Integer maxLevel;
-    private Integer minArmour;
-    private Integer minEnergyshield;
-    private Integer minEvasion;
-    private Boolean corrupted;
+    private String base;
+    private Double minQuality;
+    private Double maxQuality;
+    private Double minLevel;
+    private Double maxLevel;
+    private Double minArmour;
+    private Double maxArmour;
+    private Double minEnergy;
+    private Double maxEnergy;
+    private Double minEvasion;
+    private Double maxEvasion;
+    private Double minStrength;
+    private Double maxStrength;
+    private Double minDexterity;
+    private Double maxDexterity;
+    private Double minIntelligence;
+    private Double maxIntelligence;
     private Double minDps;
+    private Double maxDps;
+    private Double minAps;
+    private Double maxAps;
+
+    private Boolean corrupted;
+    private Boolean identified;
     private List<ModRequest> mods;
 
     public String getLeague() {
@@ -43,43 +60,43 @@ public class TradeItemRequest {
         this.type = type;
     }
 
-    public Integer getMinLevel() {
+    public Double getMinLevel() {
         return minLevel;
     }
 
-    public void setMinLevel(Integer minLevel) {
+    public void setMinLevel(Double minLevel) {
         this.minLevel = minLevel;
     }
 
-    public Integer getMaxLevel() {
+    public Double getMaxLevel() {
         return maxLevel;
     }
 
-    public void setMaxLevel(Integer maxLevel) {
+    public void setMaxLevel(Double maxLevel) {
         this.maxLevel = maxLevel;
     }
 
-    public Integer getMinArmour() {
+    public Double getMinArmour() {
         return minArmour;
     }
 
-    public void setMinArmour(Integer minArmour) {
+    public void setMinArmour(Double minArmour) {
         this.minArmour = minArmour;
     }
 
-    public Integer getMinEnergyshield() {
-        return minEnergyshield;
+    public Double getMinEnergy() {
+        return minEnergy;
     }
 
-    public void setMinEnergyshield(Integer minEnergyshield) {
-        this.minEnergyshield = minEnergyshield;
+    public void setMinEnergy(Double minEnergy) {
+        this.minEnergy = minEnergy;
     }
 
-    public Integer getMinEvasion() {
+    public Double getMinEvasion() {
         return minEvasion;
     }
 
-    public void setMinEvasion(Integer minEvasion) {
+    public void setMinEvasion(Double minEvasion) {
         this.minEvasion = minEvasion;
     }
 
@@ -105,5 +122,133 @@ public class TradeItemRequest {
 
     public void setMods(List<ModRequest> mods) {
         this.mods = mods;
+    }
+
+    public String getBase() {
+        return base;
+    }
+
+    public void setBase(String base) {
+        this.base = base;
+    }
+
+    public Double getMaxArmour() {
+        return maxArmour;
+    }
+
+    public void setMaxArmour(Double maxArmour) {
+        this.maxArmour = maxArmour;
+    }
+
+    public Double getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    public void setMaxEnergy(Double maxEnergy) {
+        this.maxEnergy = maxEnergy;
+    }
+
+    public Double getMaxEvasion() {
+        return maxEvasion;
+    }
+
+    public void setMaxEvasion(Double maxEvasion) {
+        this.maxEvasion = maxEvasion;
+    }
+
+    public Double getMinStrength() {
+        return minStrength;
+    }
+
+    public void setMinStrength(Double minStrength) {
+        this.minStrength = minStrength;
+    }
+
+    public Double getMaxStrength() {
+        return maxStrength;
+    }
+
+    public void setMaxStrength(Double maxStrength) {
+        this.maxStrength = maxStrength;
+    }
+
+    public Double getMinDexterity() {
+        return minDexterity;
+    }
+
+    public void setMinDexterity(Double minDexterity) {
+        this.minDexterity = minDexterity;
+    }
+
+    public Double getMaxDexterity() {
+        return maxDexterity;
+    }
+
+    public void setMaxDexterity(Double maxDexterity) {
+        this.maxDexterity = maxDexterity;
+    }
+
+    public Double getMinIntelligence() {
+        return minIntelligence;
+    }
+
+    public void setMinIntelligence(Double minIntelligence) {
+        this.minIntelligence = minIntelligence;
+    }
+
+    public Double getMaxIntelligence() {
+        return maxIntelligence;
+    }
+
+    public void setMaxIntelligence(Double maxIntelligence) {
+        this.maxIntelligence = maxIntelligence;
+    }
+
+    public Double getMaxDps() {
+        return maxDps;
+    }
+
+    public void setMaxDps(Double maxDps) {
+        this.maxDps = maxDps;
+    }
+
+    public Double getMinAps() {
+        return minAps;
+    }
+
+    public void setMinAps(Double minAps) {
+        this.minAps = minAps;
+    }
+
+    public Double getMaxAps() {
+        return maxAps;
+    }
+
+    public void setMaxAps(Double maxAps) {
+        this.maxAps = maxAps;
+    }
+
+    public Double getMinQuality() {
+        return minQuality;
+    }
+
+    public void setMinQuality(Double minQuality) {
+        this.minQuality = minQuality;
+    }
+
+    public Double getMaxQuality() {
+        return maxQuality;
+    }
+
+    public void setMaxQuality(Double maxQuality) {
+        this.maxQuality = maxQuality;
+    }
+
+    public Boolean getIdentified() {
+        return identified;
+    }
+
+    public void setIdentified(Boolean identified) {
+        this.identified = identified;
     }
 }
