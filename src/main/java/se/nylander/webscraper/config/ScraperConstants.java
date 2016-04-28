@@ -11,7 +11,7 @@ public final class ScraperConstants {
     public static final String NAME_TYPE_REGEX ="(?<=>)\\w(.*)\\w(?=<)|([\\w ']+\\z)|(^[\\w ']+)";
     public static final String ITEM_CORRUPTED = "corrupted";
     public static final String ITEM_TYPE = "typeLine";
-    public static final String ITEM_LEVEL_REQUIRMENT = "requirements";
+    public static final String ITEM_REQUIRMENT = "requirements";
     public static final String ITEM_IMPLICIT_MODS = "implicitMods";
     public static final String ITEM_EXPLICIT_MODS = "explicitMods";
 

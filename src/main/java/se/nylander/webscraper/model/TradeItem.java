@@ -26,8 +26,6 @@ public class TradeItem implements Serializable{
     @Column(name = "ITEM_TYPE")
     private String itemType;
 
-    @Column(name = "LEVEL_REQ")
-    private Integer levelRequirment;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Mod> mod = new HashSet<>();
@@ -37,6 +35,9 @@ public class TradeItem implements Serializable{
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Property> property = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Requirement> requirement = new ArrayList();
 
     @Column(name = "LEAGUE")
     private String league;
@@ -81,14 +82,6 @@ public class TradeItem implements Serializable{
 
     public void setItemType(String itemType) {
         this.itemType = itemType;
-    }
-
-    public Integer getLevelRequirment() {
-        return levelRequirment;
-    }
-
-    public void setLevelRequirment(Integer levelRequirment) {
-        this.levelRequirment = levelRequirment;
     }
 
     public List<ItemSocket> getItemSockets() {
@@ -163,7 +156,7 @@ public class TradeItem implements Serializable{
         this.mod = mods;
     }
 
-    public Set<Mod> getMods() {
+    public Set<Mod> getMod() {
         return mod;
     }
 
@@ -175,12 +168,21 @@ public class TradeItem implements Serializable{
         this.property = property;
     }
 
+
+
+    public List<Requirement> getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(List<Requirement> requirement) {
+        this.requirement = requirement;
+    }
+
     @Override
     public String toString() {
         return "TradeItem{" +
                 "corrupted=" + corrupted +
                 ", itemType='" + itemType + '\'' +
-                ", levelRequirment=" + levelRequirment +
                 ",\n itemSockets=" + itemSockets +
                 ", league='" + league + '\'' +
                 ", verified=" + verified +

@@ -2,18 +2,18 @@ App.factory('PoeService', ['$http', '$q', function($http, $q){
 
     return {
 
-        createUser: function (user) {
-            return $http.post('http://localhost:8080/Spring4MVCAngularJSExample/user/', user)
+        search: function (tradeitem) {
+            return $http.post('http://localhost:8082/poe-trade/search', tradeitem)
                 .then(
                     function (response) {
                         return response.data;
                     },
                     function (errResponse) {
-                        console.error('Error while creating user');
+                        console.error('Error while searching');
                         return $q.reject(errResponse);
                     }
                 );
         }
-    }
+    };
 
 }]);

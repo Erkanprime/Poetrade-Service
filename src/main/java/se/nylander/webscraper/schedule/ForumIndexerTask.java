@@ -24,7 +24,7 @@ public class ForumIndexerTask {
     @Qualifier("forumLeagueParser")
     private ForumLeagueParser indexer;
 
-    @Scheduled(initialDelay = 60000*240, fixedDelay = 60000 * 10)
+    @Scheduled(initialDelay = 60000 * 240,fixedDelay = 60000 * 10)
     public void indexForumThreads() {
         log.info("\n###### Starting Indexer Schedule job ######\n");
         //ForumLeagueParser indexer = new ForumLeagueParser();

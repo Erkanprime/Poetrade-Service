@@ -1,5 +1,6 @@
 package se.nylander.webscraper.model.request;
 
+
 import java.util.List;
 
 /**
@@ -11,30 +12,44 @@ public class TradeItemRequest {
     private String name;
     private String type;
     private String base;
-    private Double minQuality;
-    private Double maxQuality;
-    private Double minLevel;
-    private Double maxLevel;
-    private Double minArmour;
-    private Double maxArmour;
-    private Double minEnergy;
-    private Double maxEnergy;
-    private Double minEvasion;
-    private Double maxEvasion;
-    private Double minStrength;
-    private Double maxStrength;
-    private Double minDexterity;
-    private Double maxDexterity;
-    private Double minIntelligence;
-    private Double maxIntelligence;
-    private Double minDps;
-    private Double maxDps;
-    private Double minAps;
-    private Double maxAps;
-
     private Boolean corrupted;
     private Boolean identified;
+    private SocketRequest sockets;
+    private List<RequirementRequest> requirements;
+    private List<ParameterRequest> parameters;
     private List<ModRequest> mods;
+
+    public SocketRequest getSockets() {
+        return sockets;
+    }
+
+    public void setSockets(SocketRequest sockets) {
+        this.sockets = sockets;
+    }
+
+    public List<RequirementRequest> getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(List<RequirementRequest> requirements) {
+        this.requirements = requirements;
+    }
+
+    public Boolean getIdentified() {
+        return identified;
+    }
+
+    public void setIdentified(Boolean identified) {
+        this.identified = identified;
+    }
+
+    public List<ParameterRequest> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<ParameterRequest> parameters) {
+        this.parameters = parameters;
+    }
 
     public String getLeague() {
         return league;
@@ -60,60 +75,12 @@ public class TradeItemRequest {
         this.type = type;
     }
 
-    public Double getMinLevel() {
-        return minLevel;
-    }
-
-    public void setMinLevel(Double minLevel) {
-        this.minLevel = minLevel;
-    }
-
-    public Double getMaxLevel() {
-        return maxLevel;
-    }
-
-    public void setMaxLevel(Double maxLevel) {
-        this.maxLevel = maxLevel;
-    }
-
-    public Double getMinArmour() {
-        return minArmour;
-    }
-
-    public void setMinArmour(Double minArmour) {
-        this.minArmour = minArmour;
-    }
-
-    public Double getMinEnergy() {
-        return minEnergy;
-    }
-
-    public void setMinEnergy(Double minEnergy) {
-        this.minEnergy = minEnergy;
-    }
-
-    public Double getMinEvasion() {
-        return minEvasion;
-    }
-
-    public void setMinEvasion(Double minEvasion) {
-        this.minEvasion = minEvasion;
-    }
-
     public Boolean getCorrupted() {
         return corrupted;
     }
 
     public void setCorrupted(Boolean corrupted) {
         this.corrupted = corrupted;
-    }
-
-    public Double getMinDps() {
-        return minDps;
-    }
-
-    public void setMinDps(Double minDps) {
-        this.minDps = minDps;
     }
 
     public List<ModRequest> getMods() {
@@ -132,123 +99,5 @@ public class TradeItemRequest {
         this.base = base;
     }
 
-    public Double getMaxArmour() {
-        return maxArmour;
-    }
 
-    public void setMaxArmour(Double maxArmour) {
-        this.maxArmour = maxArmour;
-    }
-
-    public Double getMaxEnergy() {
-        return maxEnergy;
-    }
-
-    public void setMaxEnergy(Double maxEnergy) {
-        this.maxEnergy = maxEnergy;
-    }
-
-    public Double getMaxEvasion() {
-        return maxEvasion;
-    }
-
-    public void setMaxEvasion(Double maxEvasion) {
-        this.maxEvasion = maxEvasion;
-    }
-
-    public Double getMinStrength() {
-        return minStrength;
-    }
-
-    public void setMinStrength(Double minStrength) {
-        this.minStrength = minStrength;
-    }
-
-    public Double getMaxStrength() {
-        return maxStrength;
-    }
-
-    public void setMaxStrength(Double maxStrength) {
-        this.maxStrength = maxStrength;
-    }
-
-    public Double getMinDexterity() {
-        return minDexterity;
-    }
-
-    public void setMinDexterity(Double minDexterity) {
-        this.minDexterity = minDexterity;
-    }
-
-    public Double getMaxDexterity() {
-        return maxDexterity;
-    }
-
-    public void setMaxDexterity(Double maxDexterity) {
-        this.maxDexterity = maxDexterity;
-    }
-
-    public Double getMinIntelligence() {
-        return minIntelligence;
-    }
-
-    public void setMinIntelligence(Double minIntelligence) {
-        this.minIntelligence = minIntelligence;
-    }
-
-    public Double getMaxIntelligence() {
-        return maxIntelligence;
-    }
-
-    public void setMaxIntelligence(Double maxIntelligence) {
-        this.maxIntelligence = maxIntelligence;
-    }
-
-    public Double getMaxDps() {
-        return maxDps;
-    }
-
-    public void setMaxDps(Double maxDps) {
-        this.maxDps = maxDps;
-    }
-
-    public Double getMinAps() {
-        return minAps;
-    }
-
-    public void setMinAps(Double minAps) {
-        this.minAps = minAps;
-    }
-
-    public Double getMaxAps() {
-        return maxAps;
-    }
-
-    public void setMaxAps(Double maxAps) {
-        this.maxAps = maxAps;
-    }
-
-    public Double getMinQuality() {
-        return minQuality;
-    }
-
-    public void setMinQuality(Double minQuality) {
-        this.minQuality = minQuality;
-    }
-
-    public Double getMaxQuality() {
-        return maxQuality;
-    }
-
-    public void setMaxQuality(Double maxQuality) {
-        this.maxQuality = maxQuality;
-    }
-
-    public Boolean getIdentified() {
-        return identified;
-    }
-
-    public void setIdentified(Boolean identified) {
-        this.identified = identified;
-    }
 }

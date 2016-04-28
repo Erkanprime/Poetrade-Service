@@ -1,5 +1,5 @@
-<select ng-model="tradeitem.type" class="form-control">
-    <option value="">any</option>
+<select ng-model="tradeitem.type" ng-change="updateBase()" class="form-control">
+    <option value="any">any</option>
     <optgroup label="Weapons">
         <option value="Generic One-Handed Weapon">Generic One-Handed Weapon</option>
         <option value="Generic Two-Handed Weapon">Generic Two-Handed Weapon</option>

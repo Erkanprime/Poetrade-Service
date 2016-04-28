@@ -54,22 +54,32 @@
             <div class="form-group row" id="damageDiv">
                 <hr>
                 <h3 class="bold">Offence</h3>
+                <!-- TODO: implementera Dps värde -->
                 <div class="col-lg-4">
                     <label for="minDps" class="col-lg-3 control-label">Dps</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minDps" type="number" class="form-control" id="minDps" placeholder="min">
+                        <input ng-model="dps.minValue" type="number" class="form-control" id="minDps" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxDps" type="number" class="form-control" id="maxDps" placeholder="max">
+                        <input ng-model="dps.maxValue" type="number" class="form-control" id="maxDps" placeholder="max">
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <label for="minAps" class="col-lg-3 control-label">Aps</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minAps" type="number" class="form-control" id="minAps" placeholder="min">
+                        <input ng-model="aps.minValue" type="number" class="form-control" id="minAps" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxAps" type="number" class="form-control" id="maxAps" placeholder="max">
+                        <input ng-model="aps.maxValue" type="number" class="form-control" id="maxAps" placeholder="max">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label for="minCrit" class="col-lg-3 control-label">Crit.chance</label>
+                    <div class="col-lg-4">
+                        <input ng-model="crit.minValue" type="number" class="form-control" id="minCrit" placeholder="min">
+                    </div>
+                    <div class="col-lg-4">
+                        <input ng-model="crit.maxValue" type="number" class="form-control" id="maxCrit" placeholder="max">
                     </div>
                 </div>
             </div>
@@ -80,30 +90,30 @@
                 <div class="col-lg-4">
                     <label for="minArmour" class="col-lg-3 control-label">Armour</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minArmor" type="number" class="form-control" id="minArmour" placeholder="min">
+                        <input ng-model="armour.minValue" type="number" class="form-control" id="minArmour" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxArmour" type="number" class="form-control" id="maxArmour" placeholder="max">
+                        <input ng-model="armour.maxValue" type="number" class="form-control" id="maxArmour" placeholder="max">
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <label for="minEnergy" class="col-lg-3 control-label">Shield</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minEnergy" type="number" class="form-control" id="minEnergy" placeholder="min">
+                        <input ng-model="energy.minValue" type="number" class="form-control" id="minEnergy" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxEnergy" type="number" class="form-control" id="maxEnergy" placeholder="max">
+                        <input ng-model="energy.maxValue" type="number" class="form-control" id="maxEnergy" placeholder="max">
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <label for="minEvasion" class="col-lg-3 control-label">Evasion</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minEvasion" type="number" class="form-control" id="minEvasion" placeholder="min">
+                        <input ng-model="evasion.minValue" type="number" class="form-control" id="minEvasion" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxEvasion" type="number" class="form-control" id="maxEvasion" placeholder="max">
+                        <input ng-model="evasion.maxValue" type="number" class="form-control" id="maxEvasion" placeholder="max">
                     </div>
                 </div>
 
@@ -116,19 +126,19 @@
                 <div class="col-lg-4">
                     <label for="minSockets" class="col-lg-3 control-label">Sockets</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minSockets" type="number" class="form-control" id="minSockets" placeholder="min">
+                        <input ng-model="tradeitem.sockets.socketMinValue" type="number" class="form-control" id="minSockets" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxSockets" type="number" class="form-control" id="maxSockets" placeholder="max">
+                        <input ng-model="tradeitem.sockets.socketMaxValue" type="number" class="form-control" id="maxSockets" placeholder="max">
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <label for="minLinks" class="col-lg-3 control-label">Links</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minLinks" type="number" class="form-control" id="minLinks" placeholder="min">
+                        <input ng-model="tradeitem.sockets.linksMinValue" type="number" class="form-control" id="minLinks" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxLinks" type="number" class="form-control" id="maxLinks" placeholder="max">
+                        <input ng-model="tradeitem.sockets.linksMaxValue" type="number" class="form-control" id="maxLinks" placeholder="max">
                     </div>
                 </div>
             </div>
@@ -140,37 +150,37 @@
                 <div class="col-lg-4">
                     <label for="minLvl" class="col-lg-3 control-label">Level</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minLevel" type="number" class="form-control" id="minLvl" placeholder="min">
+                        <input ng-model="level.minValue" type="number" class="form-control" id="minLvl" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxLevel" type="number" class="form-control" id="maxLvl" placeholder="max">
+                        <input ng-model="level.maxValue" type="number" class="form-control" id="maxLvl" placeholder="max">
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <label for="minStr" class="col-lg-3 control-label">Strength</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minStrength" type="number" class="form-control" id="minStr" placeholder="min">
+                        <input ng-model="strength.minValue" type="number" class="form-control" id="minStr" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxStrength" type="number" class="form-control" id="maxStr" placeholder="max">
+                        <input ng-model="strength.maxValue" type="number" class="form-control" id="maxStr" placeholder="max">
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <label for="minDex" class="col-lg-3 control-label">Dexterity</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minDexterity" type="number" class="form-control" id="minDex" placeholder="min">
+                        <input ng-model="dexterity.minValue" type="number" class="form-control" id="minDex" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxDexterity" type="number" class="form-control" id="maxDex" placeholder="max">
+                        <input ng-model="dexterity.maxValue" type="number" class="form-control" id="maxDex" placeholder="max">
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <label for="minInt" class="col-lg-3 control-label">Intelligence</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minIntelligence" type="number" class="form-control" id="minInt" placeholder="min">
+                        <input ng-model="intelligence.minValue" type="number" class="form-control" id="minInt" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxIntelligence" type="number" class="form-control" id="maxInt" placeholder="max">
+                        <input ng-model="intelligence.maxValue" type="number" class="form-control" id="maxInt" placeholder="max">
                     </div>
                 </div>
             </div>
@@ -197,16 +207,16 @@
                 <div class="col-lg-4">
                     <label for="minDps" class="col-lg-3 control-label">Quality</label>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.minQuality" type="number" class="form-control" id="minQuality" placeholder="min">
+                        <input ng-model="quality.minValue" type="number" class="form-control" id="minQuality" placeholder="min">
                     </div>
                     <div class="col-lg-4">
-                        <input ng-model="tradeitem.maxQuality" type="number" class="form-control" id="maxQuality" placeholder="max">
+                        <input ng-model="quality.maxValue" type="number" class="form-control" id="maxQuality" placeholder="max">
                     </div>
                 </div>
                 <label for="identified" class="col-lg-1 control-label">Identified</label>
                 <div class="col-lg-2">
                     <select ng-model="tradeitem.identified" class="form-control" id="identified">
-                        <option value="">Either</option>
+                        <option value="Either">Either</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -214,7 +224,7 @@
                 <label for="corrupted" class="col-lg-1 control-label">Corrupted</label>
                 <div class="col-lg-2">
                     <select ng-model="tradeitem.corrupted" class="form-control" id="corrupted">
-                        <option value="">Either</option>
+                        <option value="Either">Either</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -222,7 +232,8 @@
             </div>
             <hr>
             <br>
-            <button style="float:right; margin-right:10%;" type="button" ng-click="submit()" class="btn btn-warning">Search</button>
+            <button style="float:left; margin-right:10%;" type="button" ng-click="showObject()" class="btn btn-default">Test</button>
+            <button style="float:right; margin-right:10%;" type="button" ng-click="searchTradeItem()" class="btn btn-warning">Search</button>
         </form>
     </div>
 

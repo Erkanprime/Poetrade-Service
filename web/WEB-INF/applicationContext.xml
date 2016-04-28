@@ -38,4 +38,6 @@
     <bean id="shopService" class="se.nylander.webscraper.service.imp.ShopServiceImp" />
     <bean id="shopDao" class="se.nylander.webscraper.dao.imp.ShopDaoImp" />
     <bean id="jsonParser" class="se.nylander.webscraper.parser.json.JsonParser" />
+    <bean id="tradeDao" class="se.nylander.webscraper.dao.imp.TradeItemDaoImp" />
+    <bean id="tradeService" class="se.nylander.webscraper.service.imp.TradeItemServiceImp" />
 </beans>

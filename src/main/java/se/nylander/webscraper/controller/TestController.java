@@ -1,5 +1,7 @@
 package se.nylander.webscraper.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import se.nylander.webscraper.model.Shop;
 import se.nylander.webscraper.model.TradeItem;
 import se.nylander.webscraper.model.request.TradeItemRequest;
+import se.nylander.webscraper.service.TradeItemService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +21,15 @@ import java.util.List;
 @Controller
 public class TestController {
 
+    @Autowired
+    @Qualifier("tradeService")
+    private TradeItemService tradeItemService;
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
     public List<TradeItem> search(@RequestBody TradeItemRequest tradeItemRequest){
         List<TradeItem> result = new ArrayList<>();
-        result.add(new TradeItem(tradeItemRequest.getLeague(),tradeItemRequest.getName()));
+        tradeItemService.search(tradeItemRequest);
         return result;
     }
 

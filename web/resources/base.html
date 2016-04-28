@@ -1,6 +1,6 @@
 <select ng-model="tradeitem.base" class="form-control">
-    <option value="" selected="selected">any</option>
-    <optgroup ng-if="tradeitem.type == 'Helmet' || tradeitem.type == ''" label="Helmet">
+    <option value="any" selected="selected">any</option>
+    <optgroup ng-if="tradeitem.type == 'Helmet' || tradeitem.type == 'any'" label="Helmet">
         <option value="Aventail Helmet">Aventail Helmet</option>
         <option value="Barbute Helmet">Barbute Helmet</option>
         <option value="Battered Helm">Battered Helm</option>
@@ -66,7 +66,7 @@
         <option value="Wolf Pelt">Wolf Pelt</option>
         <option value="Zealot Helmet">Zealot Helmet</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'One Hand Axe' || tradeitem.type == 'Generic One-Handed Weapon' || tradeitem.type == ''" label="One Hand Axe">
+    <optgroup ng-if="tradeitem.type == 'One Hand Axe' || tradeitem.type == 'any'" label="One Hand Axe">
         <option value="Arming Axe">Arming Axe</option>
         <option value="Boarding Axe">Boarding Axe</option>
         <option value="Broad Axe">Broad Axe</option>
@@ -93,7 +93,7 @@
         <option value="Wraith Axe">Wraith Axe</option>
         <option value="Wrist Chopper">Wrist Chopper</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Flask' || tradeitem.type == ''" label="Flask">
+    <optgroup ng-if="tradeitem.type == 'Flask' || tradeitem.type == 'any'" label="Flask">
         <option value="Amethyst Flask">Amethyst Flask</option>
         <option value="Aquamarine Flask">Aquamarine Flask</option>
         <option value="Basalt Flask">Basalt Flask</option>
@@ -140,7 +140,7 @@
         <option value="Sulphur Flask">Sulphur Flask</option>
         <option value="Topaz Flask">Topaz Flask</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'One Hand Sword' || tradeitem.type == '' || tradeitem.type == 'Generic One-Handed Weapon'" label="One Hand Sword">
+    <optgroup ng-if="tradeitem.type == 'One Hand Sword' || tradeitem.type == 'any'" label="One Hand Sword">
         <option value="Ancient Sword">Ancient Sword</option>
         <option value="Antique Rapier">Antique Rapier</option>
         <option value="Apex Rapier">Apex Rapier</option>
@@ -192,7 +192,7 @@
         <option value="Whalebone Rapier">Whalebone Rapier</option>
         <option value="Wyrmbone Rapier">Wyrmbone Rapier</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Claw' || tradeitem.type == '' || tradeitem.type == 'Generic One-Handed Weapon'" label="Claw">
+    <optgroup ng-if="tradeitem.type == 'Claw' || tradeitem.type == 'any'" label="Claw">
         <option value="Awl">Awl</option>
         <option value="Blinder">Blinder</option>
         <option value="Cat's Paw">Cat's Paw</option>
@@ -219,7 +219,7 @@
         <option value="Twin Claw">Twin Claw</option>
         <option value="Vaal Claw">Vaal Claw</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Body Armour' || tradeitem.type == ''" label="Body Armour">
+    <optgroup ng-if="tradeitem.type == 'Body Armour' || tradeitem.type == 'any'" label="Body Armour">
         <option value="Arena Plate">Arena Plate</option>
         <option value="Assassin's Garb">Assassin's Garb</option>
         <option value="Astral Plate">Astral Plate</option>
@@ -325,7 +325,7 @@
         <option value="Wyrmscale Doublet">Wyrmscale Doublet</option>
         <option value="Zodiac Leather">Zodiac Leather</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Map' || tradeitem.type == ''" label="Map">
+    <optgroup ng-if="tradeitem.type == 'Map' || tradeitem.type == 'any'" label="Map">
         <option value="Abandoned Cavern Map">Abandoned Cavern Map</option>
         <option value="Abyss Map">Abyss Map</option>
         <option value="Academy Map">Academy Map</option>
@@ -410,7 +410,7 @@
         <option value="Waterways Map">Waterways Map</option>
         <option value="Wharf Map">Wharf Map</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'One Hand Mace' || tradeitem.type == '' || tradeitem.type == 'Generic One-Handed Weapon'" label="One Hand Mace">
+    <optgroup ng-if="tradeitem.type == 'One Hand Mace' || tradeitem.type == 'any'" label="One Hand Mace">
         <option value="Ancestral Club">Ancestral Club</option>
         <option value="Auric Mace">Auric Mace</option>
         <option value="Barbed Club">Barbed Club</option>
@@ -437,7 +437,7 @@
         <option value="War Hammer">War Hammer</option>
         <option value="Wyrm Mace">Wyrm Mace</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Amulet' || tradeitem.type == ''" label="Amulet">
+    <optgroup ng-if="tradeitem.type == 'Amulet' || tradeitem.type == 'any'" label="Amulet">
         <option value="Agate Amulet">Agate Amulet</option>
         <option value="Amber Amulet">Amber Amulet</option>
         <option value="Ashscale Talisman">Ashscale Talisman</option>
@@ -479,7 +479,7 @@
         <option value="Wereclaw Talisman">Wereclaw Talisman</option>
         <option value="Writhing Talisman">Writhing Talisman</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Two Hand Mace' || tradeitem.type == '' || tradeitem.type == 'Generic Two-Handed Weapon'" label="Two Hand Mace">
+    <optgroup ng-if="tradeitem.type == 'Two Hand Mace' || tradeitem.type == 'any'" label="Two Hand Mace">
         <option value="Brass Maul">Brass Maul</option>
         <option value="Colossus Mallet">Colossus Mallet</option>
         <option value="Coronal Maul">Coronal Maul</option>
@@ -503,7 +503,7 @@
         <option value="Totemic Maul">Totemic Maul</option>
         <option value="Tribal Maul">Tribal Maul</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Sceptre' || tradeitem.type == '' || tradeitem.type == 'Generic One-Handed Weapon'" label="Sceptre">
+    <optgroup ng-if="tradeitem.type == 'Sceptre' || tradeitem.type == 'any'" label="Sceptre">
         <option value="Abyssal Sceptre">Abyssal Sceptre</option>
         <option value="Blood Sceptre">Blood Sceptre</option>
         <option value="Bronze Sceptre">Bronze Sceptre</option>
@@ -530,7 +530,7 @@
         <option value="Vaal Sceptre">Vaal Sceptre</option>
         <option value="Void Sceptre">Void Sceptre</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Two Hand Axe' || tradeitem.type == '' || tradeitem.type == 'Generic Two-Handed Weapon'" label="Two Hand Axe">
+    <optgroup ng-if="tradeitem.type == 'Two Hand Axe' || tradeitem.type == 'any'" label="Two Hand Axe">
         <option value="Abyssal Axe">Abyssal Axe</option>
         <option value="Dagger Axe">Dagger Axe</option>
         <option value="Despot Axe">Despot Axe</option>
@@ -554,7 +554,7 @@
         <option value="Void Axe">Void Axe</option>
         <option value="Woodsplitter">Woodsplitter</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Gem' || tradeitem.type == ''" label="Gem">
+    <optgroup ng-if="tradeitem.type == 'Gem' || tradeitem.type == 'any'" label="Gem">
         <option value="Abyssal Cry">Abyssal Cry</option>
         <option value="Added Chaos Damage">Added Chaos Damage</option>
         <option value="Added Cold Damage">Added Cold Damage</option>
@@ -821,7 +821,7 @@
         <option value="Wither">Wither</option>
         <option value="Wrath">Wrath</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Two Hand Sword' || tradeitem.type == '' || tradeitem.type == 'Generic Two-Handed Weapon'" label="Two Hand Sword">
+    <optgroup ng-if="tradeitem.type == 'Two Hand Sword' || tradeitem.type == 'any'" label="Two Hand Sword">
         <option value="Bastard Sword">Bastard Sword</option>
         <option value="Butcher Sword">Butcher Sword</option>
         <option value="Corroded Blade">Corroded Blade</option>
@@ -845,12 +845,12 @@
         <option value="Vaal Greatsword">Vaal Greatsword</option>
         <option value="Wraith Sword">Wraith Sword</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Jewel' || tradeitem.type == ''" label="Jewel">
+    <optgroup ng-if="tradeitem.type == 'Jewel' || tradeitem.type == 'any'" label="Jewel">
         <option value="Cobalt Jewel">Cobalt Jewel</option>
         <option value="Crimson Jewel">Crimson Jewel</option>
         <option value="Viridian Jewel">Viridian Jewel</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Bow' || tradeitem.type == '' || tradeitem.type == 'Generic Two-Handed Weapon'" label="Bow">
+    <optgroup ng-if="tradeitem.type == 'Bow' || tradeitem.type == 'any'" label="Bow">
         <option value="Assassin Bow">Assassin Bow</option>
         <option value="Bone Bow">Bone Bow</option>
         <option value="Citadel Bow">Citadel Bow</option>
@@ -878,7 +878,7 @@
         <option value="Steelwood Bow">Steelwood Bow</option>
         <option value="Thicket Bow">Thicket Bow</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Gloves' || tradeitem.type == ''" label="Gloves">
+    <optgroup ng-if="tradeitem.type == 'Gloves' || tradeitem.type == 'any'" label="Gloves">
         <option value="Ambush Mitts">Ambush Mitts</option>
         <option value="Ancient Gauntlets">Ancient Gauntlets</option>
         <option value="Antique Gauntlets">Antique Gauntlets</option>
@@ -932,7 +932,7 @@
         <option value="Wyrmscale Gauntlets">Wyrmscale Gauntlets</option>
         <option value="Zealot Gloves">Zealot Gloves</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Vaal Fragments' || tradeitem.type == ''" label="Vaal Fragments">
+    <optgroup ng-if="tradeitem.type == 'Vaal Fragments' || tradeitem.type == 'any'" label="Vaal Fragments">
         <option value="Mortal Grief">Mortal Grief</option>
         <option value="Mortal Hope">Mortal Hope</option>
         <option value="Mortal Ignorance">Mortal Ignorance</option>
@@ -942,7 +942,7 @@
         <option value="Sacrifice at Midnight">Sacrifice at Midnight</option>
         <option value="Sacrifice at Noon">Sacrifice at Noon</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Quiver' || tradeitem.type == ''" label="Quiver">
+    <optgroup ng-if="tradeitem.type == 'Quiver' || tradeitem.type == 'any'" label="Quiver">
         <option value="Blunt Arrow Quiver">Blunt Arrow Quiver</option>
         <option value="Broadhead Arrow Quiver">Broadhead Arrow Quiver</option>
         <option value="Conductive Quiver">Conductive Quiver</option>
@@ -957,7 +957,7 @@
         <option value="Spike-Point Arrow Quiver">Spike-Point Arrow Quiver</option>
         <option value="Two-Point Arrow Quiver">Two-Point Arrow Quiver</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Divination Card' || tradeitem.type == ''" label="Divination Card">
+    <optgroup ng-if="tradeitem.type == 'Divination Card' || tradeitem.type == 'any'" label="Divination Card">
         <option value="A Mother's Parting Gift">A Mother's Parting Gift</option>
         <option value="Abandoned Wealth">Abandoned Wealth</option>
         <option value="Anarchy's Price">Anarchy's Price</option>
@@ -1087,7 +1087,7 @@
         <option value="Volatile Power">Volatile Power</option>
         <option value="Wealth and Power">Wealth and Power</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Dagger' || tradeitem.type == '' || tradeitem.type == 'Generic One-Handed Weapon'" label="Dagger">
+    <optgroup ng-if="tradeitem.type == 'Dagger' || tradeitem.type == 'any'" label="Dagger">
         <option value="Ambusher">Ambusher</option>
         <option value="Boot Blade">Boot Blade</option>
         <option value="Boot Knife">Boot Knife</option>
@@ -1114,7 +1114,7 @@
         <option value="Stiletto">Stiletto</option>
         <option value="Trisula">Trisula</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Shield' || tradeitem.type == ''" label="Shield">
+    <optgroup ng-if="tradeitem.type == 'Shield' || tradeitem.type == 'any'" label="Shield">
         <option value="Alder Spiked Shield">Alder Spiked Shield</option>
         <option value="Alloyed Spiked Shield">Alloyed Spiked Shield</option>
         <option value="Ancient Spirit Shield">Ancient Spirit Shield</option>
@@ -1204,7 +1204,7 @@
         <option value="War Buckler">War Buckler</option>
         <option value="Yew Spirit Shield">Yew Spirit Shield</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Wand' || tradeitem.type == '' || tradeitem.type == 'Generic One-Handed Weapon'" label="Wand">
+    <optgroup ng-if="tradeitem.type == 'Wand' || tradeitem.type == 'any'" label="Wand">
         <option value="Carved Wand">Carved Wand</option>
         <option value="Crystal Wand">Crystal Wand</option>
         <option value="Demon's Horn">Demon's Horn</option>
@@ -1225,7 +1225,7 @@
         <option value="Spiraled Wand">Spiraled Wand</option>
         <option value="Tornado Wand">Tornado Wand</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Boots' || tradeitem.type == ''" label="Boots">
+    <optgroup ng-if="tradeitem.type == 'Boots' || tradeitem.type == 'any'" label="Boots">
         <option value="Ambush Boots">Ambush Boots</option>
         <option value="Ancient Greaves">Ancient Greaves</option>
         <option value="Antique Greaves">Antique Greaves</option>
@@ -1280,7 +1280,7 @@
         <option value="Wyrmscale Boots">Wyrmscale Boots</option>
         <option value="Zealot Boots">Zealot Boots</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Ring' || tradeitem.type == ''" label="Ring">
+    <optgroup ng-if="tradeitem.type == 'Ring' || tradeitem.type == 'any'" label="Ring">
         <option value="Amethyst Ring">Amethyst Ring</option>
         <option value="Coral Ring">Coral Ring</option>
         <option value="Diamond Ring">Diamond Ring</option>
@@ -1296,7 +1296,7 @@
         <option value="Two-Stone Ring">Two-Stone Ring</option>
         <option value="Unset Ring">Unset Ring</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Belt' || tradeitem.type == ''" label="Belt">
+    <optgroup ng-if="tradeitem.type == 'Belt' || tradeitem.type == 'any'" label="Belt">
         <option value="Chain Belt">Chain Belt</option>
         <option value="Cloth Belt">Cloth Belt</option>
         <option value="Golden Obi">Golden Obi</option>
@@ -1305,7 +1305,7 @@
         <option value="Rustic Sash">Rustic Sash</option>
         <option value="Studded Belt">Studded Belt</option>
     </optgroup>
-    <optgroup ng-if="tradeitem.type == 'Staff' || tradeitem.type == '' || tradeitem.type == 'Generic Two-Handed Weapon'" label="Staff">
+    <optgroup ng-if="tradeitem.type == 'Staff' || tradeitem.type == 'any'" label="Staff">
         <option value="Coiled Staff">Coiled Staff</option>
         <option value="Crescent Staff">Crescent Staff</option>
         <option value="Eclipse Staff">Eclipse Staff</option>

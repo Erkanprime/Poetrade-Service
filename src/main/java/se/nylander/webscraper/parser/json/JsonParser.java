@@ -8,6 +8,7 @@ import se.nylander.webscraper.exception.JavascriptJsonFormatException;
 import se.nylander.webscraper.model.ItemSocket;
 import se.nylander.webscraper.model.Mod;
 import se.nylander.webscraper.model.Property;
+import se.nylander.webscraper.model.Requirement;
 import se.nylander.webscraper.model.TradeItem;
 
 import java.util.*;
@@ -68,7 +69,7 @@ public class JsonParser {
             tradeItem = parseProperties(object, tradeItem);
             tradeItem = parseMods(object, tradeItem);
 
-            tradeItem = parseLevelRequirment(object, tradeItem);
+            tradeItem = parseRequirments(object, tradeItem);
             tradeItem = parseSockets(object, tradeItem);
 
             tradeItems.add(tradeItem);
@@ -175,22 +176,19 @@ public class JsonParser {
         return tradeItem;
     }
 
-    private static TradeItem parseLevelRequirment(JSONObject object, TradeItem tradeItem) {
-        try {
-            JSONArray requirements = object.getJSONArray(ScraperConstants.ITEM_LEVEL_REQUIRMENT);
+    private static TradeItem parseRequirments(JSONObject object, TradeItem tradeItem) {
 
-            for (int i = 0; i < requirements.length(); i++) {
+        Optional<JSONArray> requirements = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_REQUIRMENT));
+        List<Requirement> reqList = new ArrayList<>();
+        if(requirements.isPresent()){
+            for (int i = 0; i < requirements.get().length(); i++) {
 
-                final String nameValue = requirements.getJSONObject(i).getString("name");
-                if (nameValue.equals("Level")) {
-                    Integer levelReq = requirements.getJSONObject(i).getJSONArray("values").getJSONArray(0).getInt(0);
-                    tradeItem.setLevelRequirment(levelReq);
-                    break;
-                }
+                final String name = requirements.get().getJSONObject(i).getString("name");
+                final Double value = requirements.get().getJSONObject(i).getJSONArray("values").getJSONArray(0).getDouble(0);
+                reqList.add(new Requirement(name, value));
 
             }
-        } catch (JSONException e) {
-            return tradeItem;
+            tradeItem.setRequirement(reqList);
         }
         return tradeItem;
 
