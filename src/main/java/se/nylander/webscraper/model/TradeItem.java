@@ -16,28 +16,31 @@ public class TradeItem implements Serializable{
     @Column(name = "TRADEITEM_ID", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SHOP_ID")
-    private Shop shop;
+    //@ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name = "SHOP_OWNER")
+    @Column
+    private String shopOwner;
 
     @Column(name = "CORRUPTED")
     private Boolean corrupted;
 
-    @Column(name = "ITEM_TYPE")
-    private String itemType;
+    @Column(name = "BASE")
+    private String base;
 
+    @Column(name = "TYPE")
+    private String type;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Mod> mod = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemSocket> itemSockets = new ArrayList<>();
+    private Set<ItemSocket> itemSockets = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Property> property = new ArrayList<>();
+    private Set<Property> property = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Requirement> requirement = new ArrayList();
+    private Set<Requirement> requirement = new HashSet<>();
 
     @Column(name = "LEAGUE")
     private String league;
@@ -76,15 +79,15 @@ public class TradeItem implements Serializable{
         this.corrupted = corrupted;
     }
 
-    public String getItemType() {
-        return itemType;
+    public String getBase() {
+        return base;
     }
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
+    public void setBase(String base) {
+        this.base = base;
     }
 
-    public List<ItemSocket> getItemSockets() {
+    public Set<ItemSocket> getItemSockets() {
         return itemSockets;
     }
 
@@ -92,7 +95,7 @@ public class TradeItem implements Serializable{
         this.itemSockets.add(new ItemSocket(colour, groupId));
     }
 
-    public void setItemSockets(List<ItemSocket> itemSockets) {
+    public void setItemSockets(Set<ItemSocket> itemSockets) {
         this.itemSockets = itemSockets;
     }
 
@@ -136,12 +139,12 @@ public class TradeItem implements Serializable{
         this.name = name;
     }
 
-    public Shop getShop() {
-        return shop;
+    public String getShopOwner() {
+        return shopOwner;
     }
 
-    public void setShop(Shop shop) {
-        this.shop = shop;
+    public void setShopOwner(String shopOwner) {
+        this.shopOwner = shopOwner;
     }
 
     public Long getId() {
@@ -160,37 +163,29 @@ public class TradeItem implements Serializable{
         return mod;
     }
 
-    public List<Property> getProperty() {
+    public Set<Property> getProperty() {
         return property;
     }
 
-    public void setProperty(List<Property> property) {
+    public void setProperty(Set<Property> property) {
         this.property = property;
     }
 
 
 
-    public List<Requirement> getRequirement() {
+    public Set<Requirement> getRequirement() {
         return requirement;
     }
 
-    public void setRequirement(List<Requirement> requirement) {
+    public void setRequirement(Set<Requirement> requirement) {
         this.requirement = requirement;
     }
 
-    @Override
-    public String toString() {
-        return "TradeItem{" +
-                "corrupted=" + corrupted +
-                ", itemType='" + itemType + '\'' +
-                ",\n itemSockets=" + itemSockets +
-                ", league='" + league + '\'' +
-                ", verified=" + verified +
-                ",\n icon='" + icon + '\'' +
-                ", identified=" + identified +
-                ", name='" + name + '\'' +
-                ", price='" + price + '\'' +
-                '}' +
-                "\n";
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

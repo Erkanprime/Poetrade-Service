@@ -1,4 +1,4 @@
-package se.nylander.webscraper.config;
+package se.nylander.webscraper.util;
 
 /**
  * Created by erik.nylander on 2016-03-07.
@@ -8,7 +8,7 @@ public final class ScraperConstants {
     public static final String SHOP_POSTED_BY = "posted-by";
     public static final String ITEM_FRAGMENT = "itemFragment";
     public static final String MOD_REGEX = "(^[+-]\\d+\\.?\\d+)|(\\d+\\.?\\d+)|(\\d+)";   //"(^[+-]\\d+\\.?\\d+)|(\\d+\\.?\\d+)";
-    public static final String NAME_TYPE_REGEX ="(?<=>)\\w(.*)\\w(?=<)|([\\w ']+\\z)|(^[\\w ']+)";
+    public static final String NAME_TYPE_REGEX ="(?<=>)\\w(.*)\\w(?=<)|([\\w '-]+\\z)|(^[\\w ']+)";
     public static final String ITEM_CORRUPTED = "corrupted";
     public static final String ITEM_TYPE = "typeLine";
     public static final String ITEM_REQUIRMENT = "requirements";

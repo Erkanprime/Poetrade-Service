@@ -5,7 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import se.nylander.webscraper.config.ScraperConstants;
+import se.nylander.webscraper.util.ScraperConstants;
 import se.nylander.webscraper.model.Shop;
 import se.nylander.webscraper.parser.jsoup.util.DocUtil;
 import se.nylander.webscraper.service.ShopService;

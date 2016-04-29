@@ -8,7 +8,7 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import se.nylander.webscraper.config.ScraperConstants;
+import se.nylander.webscraper.util.ScraperConstants;
 import se.nylander.webscraper.exception.NoItemDataException;
 import se.nylander.webscraper.model.Shop;
 import se.nylander.webscraper.model.TradeItem;
@@ -90,7 +90,7 @@ public class ForumThreadParser {
         Optional<List<TradeItem>> tradeItems = jsonParser.processJsonItemDataString(dirtyJson);
 
         if (tradeItems.isPresent()) {
-            tradeItems.get().stream().forEach(item -> item.setShop(currentShop)); //Mappning för jpa
+            tradeItems.get().stream().forEach(item -> item.setShopOwner(currentShop.getShopOwner())); //Mappning för jpa
             currentShop.setTradeItems(findTradeItemPrices(tradeItems.get(), htmlBody));
 
         }

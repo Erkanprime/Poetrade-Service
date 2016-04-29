@@ -123,7 +123,8 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
     };
 
     $scope.prepareTradeItem = function(){
-        $scope.tradeitemCopy = $scope.tradeitem;
+        $scope.tradeitemCopy = angular.copy($scope.tradeitem);
+
         if($scope.tradeitemCopy.corrupted == 'Either'){
             $scope.tradeitemCopy.corrupted = null;
         }else
@@ -133,6 +134,7 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
         if($scope.tradeitemCopy.corrupted == 'No'){
             $scope.tradeitemCopy.corrupted = false;
         }
+
         if($scope.tradeitemCopy.identified == 'Either'){
             $scope.tradeitemCopy.identified = null;
         }else
@@ -142,6 +144,7 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
         if($scope.tradeitemCopy.identified == 'No'){
             $scope.tradeitemCopy.identified = false;
         }
+
         if($scope.tradeitemCopy.base == 'any'){
             $scope.tradeitemCopy.base = null;
         }
@@ -149,23 +152,43 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
             $scope.tradeitemCopy.type = null;
         }
         //parameters
-        $scope.tradeitemCopy.parameters.push($scope.quality);
-        $scope.tradeitemCopy.parameters.push($scope.armour);
-        $scope.tradeitemCopy.parameters.push($scope.evasion);
-        $scope.tradeitemCopy.parameters.push($scope.energy);
-        $scope.tradeitemCopy.parameters.push($scope.aps);
-        $scope.tradeitemCopy.parameters.push($scope.crit);
+        if($scope.quality.minValue != null || $scope.quality.maxValue != null){
+            $scope.tradeitemCopy.parameters.push($scope.quality);
+        }
+        if($scope.armour.minValue != null || $scope.armour.maxValue != null){
+            $scope.tradeitemCopy.parameters.push($scope.armour);
+        }
+        if($scope.evasion.minValue != null || $scope.evasion.maxValue != null){
+            $scope.tradeitemCopy.parameters.push($scope.evasion);
+        }
+        if($scope.energy.minValue != null || $scope.quality.energy != null){
+            $scope.tradeitemCopy.parameters.push($scope.energy);
+        }
+        if($scope.aps.minValue != null || $scope.aps.maxValue != null){
+            $scope.tradeitemCopy.parameters.push($scope.aps);
+        }
+        if($scope.crit.minValue != null || $scope.crit.maxValue != null){
+            $scope.tradeitemCopy.parameters.push($scope.crit);
+        }
 
         //requirements
-        $scope.tradeitemCopy.requirements.push($scope.strength);
-        $scope.tradeitemCopy.requirements.push($scope.dexterity);
-        $scope.tradeitemCopy.requirements.push($scope.intelligence);
-        $scope.tradeitemCopy.requirements.push($scope.level);
-
+        if($scope.strength.minValue != null || $scope.strength.maxValue != null){
+            $scope.tradeitemCopy.requirements.push($scope.strength);
+        }
+        if($scope.dexterity.minValue != null || $scope.dexterity.maxValue != null){
+            $scope.tradeitemCopy.requirements.push($scope.dexterity);
+        }
+        if($scope.intelligence.minValue != null || $scope.intelligence.maxValue != null){
+            $scope.tradeitemCopy.requirements.push($scope.intelligence);
+        }
+        if($scope.level.minValue != null || $scope.level.maxValue != null){
+            $scope.tradeitemCopy.requirements.push($scope.level);
+        }
 
     };
 
     $scope.showObject= function(){
+        console.log($scope.tradeitem);
         $scope.prepareTradeItem();
         console.log($scope.tradeitemCopy);
         $scope.tradeitemCopy = {};

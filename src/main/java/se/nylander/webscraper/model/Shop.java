@@ -37,7 +37,7 @@ public class Shop implements Serializable{
     @Column(name = "LEAGUE")
     private String league;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "shop", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TradeItem> tradeItems;
 
 

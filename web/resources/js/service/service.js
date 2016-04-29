@@ -3,7 +3,7 @@ App.factory('PoeService', ['$http', '$q', function($http, $q){
     return {
 
         search: function (tradeitem) {
-            return $http.post('http://localhost:8082/poe-trade/search', tradeitem)
+            return $http.post('http://localhost:8080/poe-trade/search', tradeitem)
                 .then(
                     function (response) {
                         return response.data;

@@ -2,7 +2,7 @@ package se.nylander.webscraper.parser.jsoup.util;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import se.nylander.webscraper.config.ScraperConstants;
+import se.nylander.webscraper.util.ScraperConstants;
 
 import java.io.IOException;
 

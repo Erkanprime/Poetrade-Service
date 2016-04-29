@@ -3,13 +3,14 @@ package se.nylander.webscraper.parser.json;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import se.nylander.webscraper.config.ScraperConstants;
+import se.nylander.webscraper.util.ScraperConstants;
 import se.nylander.webscraper.exception.JavascriptJsonFormatException;
 import se.nylander.webscraper.model.ItemSocket;
 import se.nylander.webscraper.model.Mod;
 import se.nylander.webscraper.model.Property;
 import se.nylander.webscraper.model.Requirement;
 import se.nylander.webscraper.model.TradeItem;
+import se.nylander.webscraper.util.TypeBaseUtil;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -60,7 +61,10 @@ public class JsonParser {
             JSONObject object = new JSONObject(item);
 
             tradeItem.setCorrupted(object.getBoolean(ScraperConstants.ITEM_CORRUPTED));
-            tradeItem.setItemType(parseTypeLine(object));
+            tradeItem.setBase(parseTypeLine(object));
+            if(tradeItem.getBase().contains("Superior")){
+                tradeItem.setBase(tradeItem.getBase().replaceAll("Superior","").trim());
+            }
             tradeItem.setIdentified(object.getBoolean(ScraperConstants.ITEM_IDENTIFIED));
             tradeItem.setIcon(object.getString(ScraperConstants.ITEM_ICON));
             tradeItem.setLeague(object.getString(ScraperConstants.ITEM_LEAGUE));
@@ -69,9 +73,10 @@ public class JsonParser {
             tradeItem = parseProperties(object, tradeItem);
             tradeItem = parseMods(object, tradeItem);
 
+
             tradeItem = parseRequirments(object, tradeItem);
             tradeItem = parseSockets(object, tradeItem);
-
+            tradeItem.setType(parseType(tradeItem.getBase()));
             tradeItems.add(tradeItem);
 
         });
@@ -97,7 +102,7 @@ public class JsonParser {
             Matcher matcher = pattern.matcher(name.get());
 
             return name.isPresent() && matcher.find() ?
-                    name.get().substring(matcher.start(), matcher.end()) : "";
+                    name.get().substring(matcher.start(), matcher.end()) : parseTypeLine(object);
 
     }
 
@@ -126,7 +131,7 @@ public class JsonParser {
 
     private static TradeItem parseProperties(JSONObject object, TradeItem tradeItem) {
             JSONArray properties = object.optJSONArray(ScraperConstants.ITEM_PROPERTIES);
-            List<Property> tradeItemProperties = new ArrayList<>();
+            Set<Property> tradeItemProperties = new HashSet<>();
 
         if(properties != null){
                 for (int i = 0; i < properties.length(); i++) {
@@ -179,7 +184,7 @@ public class JsonParser {
     private static TradeItem parseRequirments(JSONObject object, TradeItem tradeItem) {
 
         Optional<JSONArray> requirements = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_REQUIRMENT));
-        List<Requirement> reqList = new ArrayList<>();
+        Set<Requirement> reqList = new HashSet<>();
         if(requirements.isPresent()){
             for (int i = 0; i < requirements.get().length(); i++) {
 
@@ -282,6 +287,13 @@ public class JsonParser {
         }
         tradeItem.setMod(modList);
         return tradeItem;
+    }
+
+    private static String parseType(String base){
+
+        Optional<String> type = TypeBaseUtil.getTypeForItem(base);
+
+        return type.isPresent() ? type.get() : null;
     }
 
 }
