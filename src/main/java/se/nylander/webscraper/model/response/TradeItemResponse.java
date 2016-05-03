@@ -7,15 +7,16 @@ import java.util.List;
  */
 public class TradeItemResponse {
 
+    private String icon;
     private String name;
     private String type;
     private String base;
     private Double quality;
     private String shopOwner;
     private String price;
-    private String dps;
-    private String aps;
-    private Integer levelReq;
+    private Double dps;
+    private Double aps;
+    private Double levelReq;
     private Double armour;
     private Double energyshield;
     private Double evasion;
@@ -23,8 +24,18 @@ public class TradeItemResponse {
     private Double dexterityReq;
     private Double intelligenceReq;
     private String flavourText;
-    private List<String> baseProperties;
+    private Boolean corrupted;
+    private Boolean verified;
+    private Boolean identified;
     private List<String> mods;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public String getName() {
         return name;
@@ -74,27 +85,27 @@ public class TradeItemResponse {
         this.price = price;
     }
 
-    public String getDps() {
+    public Double getDps() {
         return dps;
     }
 
-    public void setDps(String dps) {
+    public void setDps(Double dps) {
         this.dps = dps;
     }
 
-    public String getAps() {
+    public Double getAps() {
         return aps;
     }
 
-    public void setAps(String aps) {
+    public void setAps(Double aps) {
         this.aps = aps;
     }
 
-    public Integer getLevelReq() {
+    public Double getLevelReq() {
         return levelReq;
     }
 
-    public void setLevelReq(Integer levelReq) {
+    public void setLevelReq(Double levelReq) {
         this.levelReq = levelReq;
     }
 
@@ -154,19 +165,35 @@ public class TradeItemResponse {
         this.flavourText = flavourText;
     }
 
-    public List<String> getBaseProperties() {
-        return baseProperties;
-    }
-
-    public void setBaseProperties(List<String> baseProperties) {
-        this.baseProperties = baseProperties;
-    }
-
     public List<String> getMods() {
         return mods;
     }
 
     public void setMods(List<String> mods) {
         this.mods = mods;
+    }
+
+    public Boolean getCorrupted() {
+        return corrupted;
+    }
+
+    public void setCorrupted(Boolean corrupted) {
+        this.corrupted = corrupted;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public Boolean getIdentified() {
+        return identified;
+    }
+
+    public void setIdentified(Boolean identified) {
+        this.identified = identified;
     }
 }

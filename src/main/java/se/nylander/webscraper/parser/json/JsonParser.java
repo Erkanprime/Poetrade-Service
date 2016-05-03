@@ -61,10 +61,8 @@ public class JsonParser {
             JSONObject object = new JSONObject(item);
 
             tradeItem.setCorrupted(object.getBoolean(ScraperConstants.ITEM_CORRUPTED));
-            tradeItem.setBase(parseTypeLine(object));
-            if(tradeItem.getBase().contains("Superior")){
-                tradeItem.setBase(tradeItem.getBase().replaceAll("Superior","").trim());
-            }
+            tradeItem = parseBaseType(tradeItem, object);
+
             tradeItem.setIdentified(object.getBoolean(ScraperConstants.ITEM_IDENTIFIED));
             tradeItem.setIcon(object.getString(ScraperConstants.ITEM_ICON));
             tradeItem.setLeague(object.getString(ScraperConstants.ITEM_LEAGUE));
@@ -76,7 +74,7 @@ public class JsonParser {
 
             tradeItem = parseRequirments(object, tradeItem);
             tradeItem = parseSockets(object, tradeItem);
-            tradeItem.setType(parseType(tradeItem.getBase()));
+
             tradeItems.add(tradeItem);
 
         });
@@ -90,7 +88,7 @@ public class JsonParser {
         Pattern pattern = Pattern.compile(ScraperConstants.NAME_TYPE_REGEX);
         Matcher matcher = pattern.matcher(type.get());
         return type.isPresent() && matcher.find() ?
-                type.get().substring(matcher.start(), matcher.end()) : "";
+                type.get().substring(matcher.start(), matcher.end()) : null;
     }
 
     // Check if name is empty or contains >>, if yes it returns typeline
@@ -101,6 +99,7 @@ public class JsonParser {
             Pattern pattern = Pattern.compile(ScraperConstants.NAME_TYPE_REGEX);
             Matcher matcher = pattern.matcher(name.get());
 
+            // Om inget namn finns(Vanligtvis vita och blå items?) sätt typeline till namn
             return name.isPresent() && matcher.find() ?
                     name.get().substring(matcher.start(), matcher.end()) : parseTypeLine(object);
 
@@ -289,11 +288,16 @@ public class JsonParser {
         return tradeItem;
     }
 
-    private static String parseType(String base){
+    private static TradeItem parseBaseType(TradeItem tradeItem, JSONObject object){
+        Optional<String> typeLine = Optional.ofNullable(object.optString(ScraperConstants.ITEM_TYPE));
 
-        Optional<String> type = TypeBaseUtil.getTypeForItem(base);
+        Optional<String> type = TypeBaseUtil.getType(typeLine.get());
+        Optional<String> base = TypeBaseUtil.getBase(typeLine.get());
 
-        return type.isPresent() ? type.get() : null;
+        tradeItem.setType(type.isPresent() ? type.get() : null);
+        tradeItem.setBase(base.isPresent() ? base.get() : null);
+
+        return tradeItem;
     }
 
 }

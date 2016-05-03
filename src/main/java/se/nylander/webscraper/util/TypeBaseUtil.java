@@ -2,6 +2,9 @@ package se.nylander.webscraper.util;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by erik.nylander on 2016-04-29.
@@ -329,6 +332,30 @@ public enum TypeBaseUtil {
                 .filter(e ->
                         Arrays.asList(e.getBase()).contains(base))
                 .findFirst()
-                .map(t -> t.getType());
+                .map(TypeBaseUtil::getType);
+    }
+
+    public static Optional<String> getType(String typeLine){
+        return Arrays.asList(values()).stream()
+                    .filter(e ->
+                            Arrays.asList(e.getBase()).stream()
+                                    .anyMatch(b -> {
+                                        Pattern pattern = Pattern.compile(b);
+                                        Matcher matcher = pattern.matcher(typeLine);
+                                        return matcher.find();
+                    }))
+                    .map(TypeBaseUtil::getType)
+                    .findFirst();
+    }
+
+    public static Optional<String> getBase(String typeLine){
+        for(TypeBaseUtil T : values()){
+            for(String base : T.getBase()){
+                if(typeLine.contains(base)){
+                    return Optional.of(base);
+                }
+            }
+        }
+        return Optional.empty();
     }
 }

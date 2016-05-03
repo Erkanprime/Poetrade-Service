@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import se.nylander.webscraper.model.Shop;
 import se.nylander.webscraper.model.TradeItem;
 import se.nylander.webscraper.model.request.TradeItemRequest;
+import se.nylander.webscraper.model.response.TradeItemResponse;
 import se.nylander.webscraper.service.TradeItemService;
 
 import java.util.ArrayList;
@@ -27,9 +28,9 @@ public class TestController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
-    public List<TradeItem> search(@RequestBody TradeItemRequest tradeItemRequest){
-        List<TradeItem> result = new ArrayList<>();
-        tradeItemService.search(tradeItemRequest);
+    public List<TradeItemResponse> search(@RequestBody TradeItemRequest tradeItemRequest){
+        List<TradeItemResponse> result = new ArrayList<>();
+        result = tradeItemService.search(tradeItemRequest);
         return result;
     }
 
