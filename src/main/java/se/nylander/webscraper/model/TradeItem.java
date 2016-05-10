@@ -13,28 +13,22 @@ public class TradeItem implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "TRADEITEM_ID", nullable = false)
     private Long id;
 
-    //@ManyToOne(fetch = FetchType.EAGER)
-    //@JoinColumn(name = "SHOP_OWNER")
-    @Column
     private String shopOwner;
 
-    @Column(name = "CORRUPTED")
     private Boolean corrupted;
 
-    @Column(name = "BASE")
     private String base;
 
-    @Column(name = "TYPE")
     private String type;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("modOrder ASC")
     private Set<Mod> mod = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ItemSocket> itemSockets = new HashSet<>();
+    private List<ItemSocket> itemSockets = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Property> property = new HashSet<>();
@@ -42,29 +36,29 @@ public class TradeItem implements Serializable{
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Requirement> requirement = new HashSet<>();
 
-    @Column(name = "LEAGUE")
     private String league;
 
-    @Column(name = "VERIFIED")
     private Boolean verified;
 
-    @Column(name = "ICON", length = 500)
+    @Column(length = 500)
     private String icon;
 
-    @Column(name = "IDENTIFIED")
     private Boolean identified;
 
-    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "PRICE", nullable = true)
     private String price;
 
+    private Integer iLvl;
 
-    public TradeItem(String league, String name) {
-        this.league = league;
-        this.name = name;
-    }
+    private Double pDps;
+
+    private Double eDps;
+
+    private Integer highestLink;
+
+    private Integer rarity;
+
     public TradeItem(){}
 
     public String getPrice() { return price; }
@@ -87,7 +81,7 @@ public class TradeItem implements Serializable{
         this.base = base;
     }
 
-    public Set<ItemSocket> getItemSockets() {
+    public List<ItemSocket> getItemSockets() {
         return itemSockets;
     }
 
@@ -95,7 +89,7 @@ public class TradeItem implements Serializable{
         this.itemSockets.add(new ItemSocket(colour, groupId));
     }
 
-    public void setItemSockets(Set<ItemSocket> itemSockets) {
+    public void setItemSockets(List<ItemSocket> itemSockets) {
         this.itemSockets = itemSockets;
     }
 
@@ -163,6 +157,10 @@ public class TradeItem implements Serializable{
         return mod;
     }
 
+    public void addMod(Mod mod){
+        this.mod.add(mod);
+    }
+
     public Set<Property> getProperty() {
         return property;
     }
@@ -187,5 +185,45 @@ public class TradeItem implements Serializable{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Integer getiLvl() {
+        return iLvl;
+    }
+
+    public void setiLvl(Integer iLvl) {
+        this.iLvl = iLvl;
+    }
+
+    public Double getpDps() {
+        return pDps;
+    }
+
+    public void setpDps(Double pDps) {
+        this.pDps = pDps;
+    }
+
+    public Double geteDps() {
+        return eDps;
+    }
+
+    public void seteDps(Double eDps) {
+        this.eDps = eDps;
+    }
+
+    public Integer getHighestLink() {
+        return highestLink;
+    }
+
+    public void setHighestLink(Integer highestLink) {
+        this.highestLink = highestLink;
+    }
+
+    public Integer getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(Integer rarity) {
+        this.rarity = rarity;
     }
 }

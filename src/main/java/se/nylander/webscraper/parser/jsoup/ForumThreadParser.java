@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -86,6 +88,11 @@ public class ForumThreadParser {
 
         Shop currentShop = extractShopMetaInfo(htmlBody);
         currentShop.setThreadLink(href);
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(currentShop.getThreadLink());
+        currentShop.setId(matcher.find() ?
+                Long.valueOf(currentShop.getThreadLink().substring(matcher.start(),matcher.end()))
+                : null);
 
         Optional<List<TradeItem>> tradeItems = jsonParser.processJsonItemDataString(dirtyJson);
 
@@ -233,4 +240,14 @@ public class ForumThreadParser {
         }
         return nodeList;
     }
+
+    /*
+    public static void main(String[] args) throws Exception {
+
+        ForumThreadParser parser = new ForumThreadParser();
+        parser.readForumLinksShops("/forum/view-thread/1653536");
+    }
+    */
+
+
 }

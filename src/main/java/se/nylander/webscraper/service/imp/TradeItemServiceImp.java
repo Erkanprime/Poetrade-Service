@@ -4,24 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import se.nylander.webscraper.dao.TradeItemDao;
-import se.nylander.webscraper.model.Mod;
-import se.nylander.webscraper.model.Property;
-import se.nylander.webscraper.model.Requirement;
-import se.nylander.webscraper.model.TradeItem;
+import se.nylander.webscraper.model.*;
 import se.nylander.webscraper.model.request.TradeItemRequest;
+import se.nylander.webscraper.model.response.SocketResponse;
 import se.nylander.webscraper.model.response.TradeItemResponse;
 import se.nylander.webscraper.service.TradeItemService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by erik.nylander on 2016-03-31.
  */
 @Service
-public class TradeItemServiceImp implements TradeItemService{
+public class TradeItemServiceImp implements TradeItemService {
 
     @Autowired
     @Qualifier("tradeDao")
@@ -31,33 +26,27 @@ public class TradeItemServiceImp implements TradeItemService{
     public List<TradeItemResponse> search(TradeItemRequest request) {
         Optional<List<TradeItem>> tradeItems = tradeItemDao.search(request);
         List<TradeItemResponse> tradeItemResponses = new ArrayList<>();
-        if(tradeItems.isPresent()){
+        if (tradeItems.isPresent()) {
 
             tradeItems.get().stream().forEach(tradeItem -> {
                 TradeItemResponse response = new TradeItemResponse();
                 response.setBase(tradeItem.getBase());
                 response.setType(tradeItem.getType());
-                response.setAps(extractPropValue("Attacks per Second", tradeItem.getProperty()));
-                response.setDps(0d);
-                response.setArmour(extractPropValue("Armour", tradeItem.getProperty()));
-                response.setEvasion(extractPropValue("Evasion Rating", tradeItem.getProperty()));
-                response.setEnergyshield(extractPropValue("Energy Shield", tradeItem.getProperty()));
-
-                response.setQuality(extractPropValue("Quality", tradeItem.getProperty()));
-                response.setStrengthReq(extractReqValue("Str", tradeItem.getRequirement()));
-                response.setDexterityReq(extractReqValue("Dex", tradeItem.getRequirement()));
-                response.setIntelligenceReq(extractReqValue("Int", tradeItem.getRequirement()));
-                response.setLevelReq(extractReqValue("Level", tradeItem.getRequirement()));
-
+                response.setpDps(tradeItem.getpDps());
+                response.seteDps(tradeItem.geteDps());
+                response.setProperties(extractProperties(tradeItem.getProperty(), tradeItem.getType()));
+                response.setRequirements(extractRequirements(tradeItem.getRequirement()));
                 response.setMods(convertModsToString(tradeItem.getMod()));
-                response.setFlavourText("Flavour Text");
                 response.setShopOwner(tradeItem.getShopOwner());
                 response.setPrice(tradeItem.getPrice());
                 response.setIcon(tradeItem.getIcon());
+                response.setIlvl(tradeItem.getiLvl());
                 response.setIdentified(tradeItem.getIdentified());
                 response.setCorrupted(tradeItem.getCorrupted());
                 response.setVerified(tradeItem.getVerified());
                 response.setName(tradeItem.getName());
+                response.setSockets(extractSockets(tradeItem.getItemSockets()));
+                response.setRarity(tradeItem.getRarity());
                 tradeItemResponses.add(response);
             });
 
@@ -66,30 +55,68 @@ public class TradeItemServiceImp implements TradeItemService{
         return tradeItemResponses;
     }
 
-    private Double extractPropValue(String propName, Set<Property> properties){
-        return properties.stream()
-                .filter(prop -> prop.getPropName().equalsIgnoreCase(propName))
-                .map(Property::getMiniValue)
-                .findFirst().orElse(0d);
+    private HashMap<String, String> extractProperties(Set<Property> properties, String type) {
+        HashMap<String, String> map = new HashMap<>();
+
+        properties.stream()
+                .forEach(p -> {
+
+                    if (!Objects.equals(p.getMiniValue(), p.getMaxiValue())) {
+                        String propName = p.getPropName();
+
+                        if(type.equalsIgnoreCase("Flask")){
+                            propName = propName.replaceFirst("#", p.getMiniValue().toString().replace(".0", ""));
+                            propName = propName.replaceFirst("#", p.getMaxiValue().toString().replace(".0", ""));
+                            map.put(propName, null);
+                        }else {
+                            map.put(p.getPropName(), p.getMiniValue() + "-" + p.getMaxiValue());
+                        }
+
+                    } else {
+                        if (p.getMiniValue() != null) {
+                            if(type.equalsIgnoreCase("Flask")){
+                                String propName = p.getPropName();
+                                propName = propName.replaceFirst("#", p.getMiniValue().toString().replace(".0", ""));
+                                map.put(propName, null);
+                            }else{
+                                map.put(p.getPropName(), p.getMiniValue().toString());
+                            }
+                        } else {
+                            map.put(p.getPropName(), p.getTextValue() == null ? "": p.getTextValue());
+                        }
+                    }
+
+                });
+
+        return map;
+
     }
 
-    private Double extractReqValue(String reqName, Set<Requirement> requirements){
-        return requirements.stream()
-                .filter(req -> req.getReqName().equalsIgnoreCase(reqName))
-                .map(Requirement::getReqValue)
-                .findFirst().orElse(0d);
+    private HashMap<String, Integer> extractRequirements(Set<Requirement> requirements) {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        requirements.stream()
+                .forEach(r -> map.put(r.getReqName(), r.getReqValue()));
+
+        return map;
     }
 
-    private List<String> convertModsToString(Set<Mod> mods){
+    private List<String> convertModsToString(Set<Mod> mods) {
         List<String> stringMods = new ArrayList<>();
-        for(Mod mod : mods){
+        for (Mod mod : mods) {
             String modText = mod.getModName();
-            if(mod.getMiniValue()!= null && mod.getMaxiValue() != null){
-                modText = modText.replaceFirst("#", mod.getMiniValue().toString().replace(".0",""));
-                modText = modText.replaceFirst("#", mod.getMaxiValue().toString().replace(".0",""));
+            if (mod.getMiniValue() != null && mod.getMaxiValue() != null) {
+                modText = modText.replaceFirst("#", mod.getMiniValue().toString().replace(".0", ""));
+                modText = modText.replaceFirst("#", mod.getMaxiValue().toString().replace(".0", ""));
             }
             stringMods.add(modText);
         }
         return stringMods;
+    }
+
+    private List<SocketResponse> extractSockets(List<ItemSocket> sockets){
+        List<SocketResponse> list = new ArrayList<>();
+        sockets.stream().forEach(s -> list.add(new SocketResponse(s.getGroupId(),s.getColour())));
+        return list;
     }
 }

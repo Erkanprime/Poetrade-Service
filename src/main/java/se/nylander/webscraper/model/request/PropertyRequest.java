@@ -3,7 +3,7 @@ package se.nylander.webscraper.model.request;
 /**
  * Created by erik.nylander on 2016-04-28.
  */
-public class ParameterRequest {
+public class PropertyRequest {
     private String name;
     private Double minValue;
     private Double maxValue;

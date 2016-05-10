@@ -14,10 +14,41 @@ public class TradeItemRequest {
     private String base;
     private Boolean corrupted;
     private Boolean identified;
+    private Double minEdps;
+    private Double maxEdps;
+    private Double minPdps;
+    private Double maxPdps;
+    private Integer rarity;
+    private Integer minIlvl;
+    private Integer maxIlvl;
     private SocketRequest sockets;
     private List<RequirementRequest> requirements;
-    private List<ParameterRequest> parameters;
+    private List<PropertyRequest> properties;
     private List<ModRequest> mods;
+
+    public Integer getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(Integer rarity) {
+        this.rarity = rarity;
+    }
+
+    public Integer getMinIlvl() {
+        return minIlvl;
+    }
+
+    public void setMinIlvl(Integer minIlvl) {
+        this.minIlvl = minIlvl;
+    }
+
+    public Integer getMaxIlvl() {
+        return maxIlvl;
+    }
+
+    public void setMaxIlvl(Integer maxIlvl) {
+        this.maxIlvl = maxIlvl;
+    }
 
     public SocketRequest getSockets() {
         return sockets;
@@ -43,12 +74,12 @@ public class TradeItemRequest {
         this.identified = identified;
     }
 
-    public List<ParameterRequest> getParameters() {
-        return parameters;
+    public List<PropertyRequest> getProperties() {
+        return properties;
     }
 
-    public void setParameters(List<ParameterRequest> parameters) {
-        this.parameters = parameters;
+    public void setProperties(List<PropertyRequest> properties) {
+        this.properties = properties;
     }
 
     public String getLeague() {
@@ -99,5 +130,35 @@ public class TradeItemRequest {
         this.base = base;
     }
 
+    public Double getMinEdps() {
+        return minEdps;
+    }
 
+    public void setMinEdps(Double minEdps) {
+        this.minEdps = minEdps;
+    }
+
+    public Double getMaxEdps() {
+        return maxEdps;
+    }
+
+    public void setMaxEdps(Double maxEdps) {
+        this.maxEdps = maxEdps;
+    }
+
+    public Double getMinPdps() {
+        return minPdps;
+    }
+
+    public void setMinPdps(Double minPdps) {
+        this.minPdps = minPdps;
+    }
+
+    public Double getMaxPdps() {
+        return maxPdps;
+    }
+
+    public void setMaxPdps(Double maxPdps) {
+        this.maxPdps = maxPdps;
+    }
 }

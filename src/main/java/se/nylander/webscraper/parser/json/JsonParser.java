@@ -3,25 +3,25 @@ package se.nylander.webscraper.parser.json;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import se.nylander.webscraper.util.ScraperConstants;
+import org.springframework.util.StringUtils;
 import se.nylander.webscraper.exception.JavascriptJsonFormatException;
-import se.nylander.webscraper.model.ItemSocket;
-import se.nylander.webscraper.model.Mod;
-import se.nylander.webscraper.model.Property;
-import se.nylander.webscraper.model.Requirement;
-import se.nylander.webscraper.model.TradeItem;
+import se.nylander.webscraper.model.*;
+import se.nylander.webscraper.util.ScraperConstants;
 import se.nylander.webscraper.util.TypeBaseUtil;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by erik.nylander on 2016-02-18.
  */
 public class JsonParser {
 
-    public JsonParser(){}
+    public JsonParser() {
+    }
 
     public Optional<List<TradeItem>> processJsonItemDataString(String dirtyJson) {
         String json;
@@ -62,7 +62,7 @@ public class JsonParser {
 
             tradeItem.setCorrupted(object.getBoolean(ScraperConstants.ITEM_CORRUPTED));
             tradeItem = parseBaseType(tradeItem, object);
-
+            tradeItem.setiLvl(object.optInt(ScraperConstants.ITEM_ILVL));
             tradeItem.setIdentified(object.getBoolean(ScraperConstants.ITEM_IDENTIFIED));
             tradeItem.setIcon(object.getString(ScraperConstants.ITEM_ICON));
             tradeItem.setLeague(object.getString(ScraperConstants.ITEM_LEAGUE));
@@ -71,9 +71,10 @@ public class JsonParser {
             tradeItem = parseProperties(object, tradeItem);
             tradeItem = parseMods(object, tradeItem);
 
-
             tradeItem = parseRequirments(object, tradeItem);
             tradeItem = parseSockets(object, tradeItem);
+            tradeItem = calculateDps(tradeItem);
+            tradeItem.setRarity(object.optInt("frameType"));
 
             tradeItems.add(tradeItem);
 
@@ -96,87 +97,141 @@ public class JsonParser {
         Optional<String> name = Optional.ofNullable(object.optString(ScraperConstants.ITEM_NAME));
 
 
-            Pattern pattern = Pattern.compile(ScraperConstants.NAME_TYPE_REGEX);
-            Matcher matcher = pattern.matcher(name.get());
+        Pattern pattern = Pattern.compile(ScraperConstants.NAME_TYPE_REGEX);
+        Matcher matcher = pattern.matcher(name.get());
 
-            // Om inget namn finns(Vanligtvis vita och blå items?) sätt typeline till namn
-            return name.isPresent() && matcher.find() ?
-                    name.get().substring(matcher.start(), matcher.end()) : parseTypeLine(object);
+        // Om inget namn finns(Vanligtvis vita och blå items?) sätt typeline till namn
+        return name.isPresent() && matcher.find() ?
+                name.get().substring(matcher.start(), matcher.end()) : parseTypeLine(object);
 
     }
 
     private static TradeItem parseMods(JSONObject object, TradeItem tradeItem) {
 
-            Optional<JSONArray> implicitMods = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_IMPLICIT_MODS));
-            Optional<JSONArray> explicitMods = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_EXPLICIT_MODS));
-            Optional<JSONArray> craftedMods = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_CRAFTED_MODS));
+        Optional<JSONArray> implicitMods = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_IMPLICIT_MODS));
+        Optional<JSONArray> explicitMods = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_EXPLICIT_MODS));
+        Optional<JSONArray> craftedMods = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_CRAFTED_MODS));
 
 
-            if (implicitMods.isPresent()) {
+        if (implicitMods.isPresent()) {
 
-                tradeItem = manageModProperties(implicitMods.get(), tradeItem);
-            }
-            if (explicitMods.isPresent()) {
+            tradeItem = manageModProperties(implicitMods.get(), tradeItem);
+        }
+        if (explicitMods.isPresent()) {
 
-                tradeItem = manageModProperties(explicitMods.get(), tradeItem);
+            tradeItem = manageModProperties(explicitMods.get(), tradeItem);
 
-            }if (craftedMods.isPresent()) {
+        }
+        if (craftedMods.isPresent()) {
 
-                tradeItem = manageModProperties(craftedMods.get(), tradeItem);
-            }
+            tradeItem = manageModProperties(craftedMods.get(), tradeItem);
+        }
 
         return tradeItem;
     }
 
     private static TradeItem parseProperties(JSONObject object, TradeItem tradeItem) {
-            JSONArray properties = object.optJSONArray(ScraperConstants.ITEM_PROPERTIES);
-            Set<Property> tradeItemProperties = new HashSet<>();
+        JSONArray properties = object.optJSONArray(ScraperConstants.ITEM_PROPERTIES);
+        Set<Property> tradeItemProperties = new HashSet<>();
 
-        if(properties != null){
-                for (int i = 0; i < properties.length(); i++) {
-                //Optional<String> value = properties.getJSONObject(i).getJSONArray("values").getJSONArray(0).toString();
+        if (properties != null) {
+            for (int i = 0; i < properties.length(); i++) {
                 Property property = new Property();
 
 
-                    Optional<JSONArray> values = Optional.ofNullable(properties.getJSONObject(i).getJSONArray("values"));
-                    Optional<String> value = Optional.ofNullable(values.isPresent() && !values.get().isNull(0)
-                            ? values.get()
-                            .getJSONArray(0).optString(0)
-                            : null
-                    );
+                Optional<JSONArray> values = Optional.ofNullable(properties.getJSONObject(i).getJSONArray("values"));
 
-                if(value.isPresent()){
-                    Pattern pattern = Pattern.compile(ScraperConstants.MOD_REGEX);
-                    Matcher matcher = pattern.matcher(value.get());
+                if (values.isPresent()) {
 
-                    Optional<Double> optionalMinValue = Optional.ofNullable(matcher.find()
-                            ? Double.parseDouble(value.get().substring(matcher.start(), matcher.end()))
-                            : null
-                    );
+                    Integer length = values.get().length();
+                    Pattern pattern;
+                    Matcher matcher;
+                    for (int x = 0; x < length; x++) {
+                        String value = values.get().getJSONArray(x).optString(0);
+                        pattern = Pattern.compile("\\d+-\\d+");
+                        matcher = pattern.matcher(value);
+                        Double minValue = null;
+                        Double maxValue = null;
 
-                    Optional<Double> optionalMaxValue = Optional.ofNullable(matcher.find()
-                            ? Double.parseDouble(value.get().substring(matcher.start(), matcher.end()))
-                            : optionalMinValue.isPresent()
-                            ? optionalMinValue.get()
-                            : null
-                    );
+                        // Om property = Adds 10-20 ..
+                        if (matcher.find()) {
+                            pattern = Pattern.compile(ScraperConstants.MOD_REGEX);
+                            matcher = pattern.matcher(value);
+                            minValue = matcher.find() ? Double.valueOf(value.substring(matcher.start(), matcher.end()))
+                                    : null;
 
-                    property.setMiniValue(optionalMinValue.isPresent() ? optionalMinValue.get() : null);
-                    property.setMaxiValue(optionalMaxValue.isPresent() ? optionalMaxValue.get() : null);
-                    property.setNumberValue(optionalMinValue.isPresent() && optionalMaxValue.isPresent());
-                    property.setTextValue(!property.getNumberValue() ? value.get() : null);
+                            maxValue = matcher.find() ? Double.valueOf(value.substring(matcher.start(), matcher.end()))
+                                    : null;
 
-                }else {
-                    property.setNumberValue(false);
+                            Double oldMinValue = property.getMiniValue();
+                            Double oldMaxValue = property.getMaxiValue();
+
+                            if (minValue != null) {
+                                property.setMiniValue(oldMinValue == null ?
+                                        minValue : minValue + oldMinValue);
+                            }
+                            if (maxValue != null) {
+                                property.setMaxiValue(oldMaxValue == null ?
+                                        maxValue : maxValue + oldMaxValue);
+                            }
+
+                        } else {
+                            pattern = Pattern.compile(ScraperConstants.MOD_REGEX);
+
+                            if (length == 1) {
+                                matcher = pattern.matcher(value);
+                                minValue = matcher.find() ? Double.valueOf(value.substring(matcher.start(), matcher.end()))
+                                        : null;
+                                property.setMiniValue(minValue);
+                                property.setMaxiValue(minValue);
+
+
+                            } else
+                                // Specialfall för flaskor?
+                                if (length == 2) {
+                                    matcher = pattern.matcher(value);
+                                    minValue = matcher.find() ? Double.valueOf(value.substring(matcher.start(), matcher.end()))
+                                            : null;
+                                    property.setMiniValue(minValue);
+
+                                    String secondValue = values.get().getJSONArray(x + 1).optString(0);
+                                    matcher = pattern.matcher(secondValue);
+                                    maxValue = matcher.find() ? Double.valueOf(secondValue.substring(matcher.start(), matcher.end()))
+                                            : null;
+                                    property.setMaxiValue(maxValue);
+
+                                }
+
+                        }
+
+                        if (minValue == null && maxValue == null) {
+                            property.setTextValue(value);
+                        }
+                        if (length == 2) {
+                            break;
+                        }
+
+                    }
+                    String propName = properties.getJSONObject(i).getString("name");
+
+                    if (tradeItem.getType() != null && tradeItem.getType().equalsIgnoreCase("Flask")) {
+                        if (!StringUtils.hasLength(propName)) {
+                            propName = values.get().getJSONArray(0).optString(0);
+
+                        }
+                        propName = propName.replaceAll("(%\\d)|(\\d+)", "#");
+                    }
+
+
+                    property.setPropName(propName);
+
                 }
 
-                    String name = properties.getJSONObject(i).getString("name");
-                    property.setPropName(name);
-                    tradeItemProperties.add(property);
-                }
-
-               tradeItem.setProperty(tradeItemProperties);
+                tradeItemProperties.add(property);
             }
+
+            tradeItem.setProperty(tradeItemProperties);
+        }
         return tradeItem;
     }
 
@@ -184,11 +239,11 @@ public class JsonParser {
 
         Optional<JSONArray> requirements = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_REQUIRMENT));
         Set<Requirement> reqList = new HashSet<>();
-        if(requirements.isPresent()){
+        if (requirements.isPresent()) {
             for (int i = 0; i < requirements.get().length(); i++) {
 
                 final String name = requirements.get().getJSONObject(i).getString("name");
-                final Double value = requirements.get().getJSONObject(i).getJSONArray("values").getJSONArray(0).getDouble(0);
+                final Integer value = requirements.get().getJSONObject(i).getJSONArray("values").getJSONArray(0).getInt(0);
                 reqList.add(new Requirement(name, value));
 
             }
@@ -199,40 +254,46 @@ public class JsonParser {
     }
 
     private static TradeItem parseSockets(JSONObject object, TradeItem tradeItem) {
-        try {
-            JSONArray sockets = object.getJSONArray(ScraperConstants.ITEM_SOCKETS);
-            Set<ItemSocket> socketsAndLinks = new HashSet<>();
 
-            for (int i = 0; i < sockets.length(); i++) {
-                JSONObject socket = sockets.getJSONObject(i);
+        Optional<JSONArray> sockets = Optional.ofNullable(object.optJSONArray(ScraperConstants.ITEM_SOCKETS));
+        if (sockets.isPresent()) {
+            for (int i = 0; i < sockets.get().length(); i++) {
+                JSONObject socket = sockets.get().getJSONObject(i);
                 Integer socketGroup = socket.getInt("group");
                 String socketColor;
 
-                switch (socket.getString("attr")){
-                case "D":
-                    socketColor = "Green";
-                    break;
-                case "I":
-                    socketColor = "Blue";
-                    break;
-                case "S":
-                    socketColor = "Red";
-                    break;
-                default:
-                    socketColor = "White";
-                    break;
+                switch (socket.getString("attr")) {
+                    case "D":
+                        socketColor = "Green";
+                        break;
+                    case "I":
+                        socketColor = "Blue";
+                        break;
+                    case "S":
+                        socketColor = "Red";
+                        break;
+                    default:
+                        socketColor = "White";
+                        break;
                 }
                 tradeItem.addItemSocket(socketGroup, socketColor);
 
             }
-        } catch (JSONException e) {
-            return tradeItem;
+
+
+            Integer highestlinked = tradeItem.getItemSockets().stream().map(s ->
+                    Collections.frequency(tradeItem.getItemSockets(), s))
+                    .filter(i -> i > 1)
+                    .max(Integer::compareTo)
+                    .orElse(0);
+
+            tradeItem.setHighestLink(highestlinked);
         }
+
         return tradeItem;
     }
 
-    private static TradeItem manageModProperties(JSONArray mods , TradeItem tradeItem) {
-        Set<Mod> modList = new HashSet<>();
+    private static TradeItem manageModProperties(JSONArray mods, TradeItem tradeItem) {
 
         for (int i = 0; i < mods.length(); i++) {
 
@@ -249,46 +310,44 @@ public class JsonParser {
             Optional<Double> optionalMaxValue = Optional.ofNullable(matcher.find()
                     ? Double.parseDouble(modName.substring(matcher.start(), matcher.end()))
                     : optionalMinValue.isPresent()
-                                      ? optionalMinValue.get()
-                                      : null
+                    ? optionalMinValue.get()
+                    : null
             );
 
             //Ta bort nummer för att göra mod-namnet generiskt
-            modName = modName.replaceAll("(\\d+)","#");
+            modName = modName.replaceAll("(\\d+)", "#");
             final Mod currentMod = new Mod(modName, optionalMinValue.isPresent()
-                                            ? optionalMinValue.get()
-                                            : null
-                                        , optionalMaxValue.isPresent()
-                                            ? optionalMaxValue.get()
-                                            : null);
+                    ? optionalMinValue.get() : null
+                    , optionalMaxValue.isPresent()
+                    ? optionalMaxValue.get() : null,
+                    i);
 
-            Optional<Mod> existingMod = modList.stream()
-                                                 .filter(mod -> mod.equals(currentMod))
-                                                 .findFirst();
+            Optional<Mod> existingMod = tradeItem.getMod().stream()
+                    .filter(mod -> mod.equals(currentMod))
+                    .findFirst();
 
 
-            if(existingMod.isPresent()) {
+            if (existingMod.isPresent()) {
                 Double existingModMinValue = existingMod.get().getMiniValue();
                 Double existingModMaxValue = existingMod.get().getMaxiValue();
 
-                if(existingModMinValue != null && currentMod.getMiniValue() != null) {
+                if (existingModMinValue != null && currentMod.getMiniValue() != null) {
                     existingMod.get().setMiniValue(existingModMinValue + currentMod.getMiniValue());
                 }
-                if(existingModMaxValue != null && currentMod.getMaxiValue() != null){
+                if (existingModMaxValue != null && currentMod.getMaxiValue() != null) {
                     existingMod.get().setMaxiValue(existingModMaxValue + currentMod.getMaxiValue());
                 }
 
-                modList.add(existingMod.get());
+                tradeItem.addMod(existingMod.get());
             } else {
-                modList.add(currentMod);
+                tradeItem.addMod(currentMod);
             }
 
         }
-        tradeItem.setMod(modList);
         return tradeItem;
     }
 
-    private static TradeItem parseBaseType(TradeItem tradeItem, JSONObject object){
+    private static TradeItem parseBaseType(TradeItem tradeItem, JSONObject object) {
         Optional<String> typeLine = Optional.ofNullable(object.optString(ScraperConstants.ITEM_TYPE));
 
         Optional<String> type = TypeBaseUtil.getType(typeLine.get());
@@ -298,6 +357,41 @@ public class JsonParser {
         tradeItem.setBase(base.isPresent() ? base.get() : null);
 
         return tradeItem;
+    }
+
+    private static TradeItem calculateDps(TradeItem tradeItem) {
+        Set<Property> properties = tradeItem.getProperty();
+
+        Optional<Double> aps = getApsFromProperties(properties);
+        if (aps.isPresent()) {
+
+            Optional<Double> pDps = getDamageFromProperties(properties, "Physical Damage");
+            tradeItem.setpDps(pDps.isPresent()
+                    ? (pDps.get() / 2 * aps.get())
+                    : null);
+
+            Optional<Double> eDps = getDamageFromProperties(properties, "Elemental Damage");
+            tradeItem.seteDps(eDps.isPresent()
+                    ? (eDps.get() / 2 * aps.get())
+                    : null);
+
+        }
+
+        return tradeItem;
+    }
+
+    private static Optional<Double> getDamageFromProperties(Set<Property> properties, String damageType) {
+        return properties.stream()
+                .filter(p -> p.getPropName().equalsIgnoreCase(damageType))
+                .map(d -> d.getMiniValue() + d.getMaxiValue())
+                .findFirst();
+    }
+
+    private static Optional<Double> getApsFromProperties(Set<Property> properties) {
+        return properties.stream()
+                .filter(p -> p.getPropName().equalsIgnoreCase("Attacks per Second"))
+                .map(Property::getMiniValue)
+                .findFirst();
     }
 
 }

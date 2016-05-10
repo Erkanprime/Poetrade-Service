@@ -25,37 +25,8 @@ public class ShopServiceImp implements ShopService{
 
     @Override
     public void saveOrUpdate(Shop shop) {
-        Optional<Shop> optional = getShopByThreadAndLeague(shop.getLeague(), shop.getThreadLink());
-
-        if(optional.isPresent()){
-            log.info(shop.getThreadLink() + " Already exists, Merging shop...");
-            shop.setId(optional.get().getId());
-            shopDao.update(shop);
-        }else {
-            shopDao.save(shop);
-        }
+        shopDao.update(shop);
     }
 
-
-
-    @Override
-    public Optional<Shop> getLatestIndexed(String league) {
-            try {
-                return Optional.ofNullable(shopDao.getLatestIndexed(league));
-            } catch (IndexOutOfBoundsException e) {
-                return Optional.empty();
-            }
-    }
-
-    @Override
-    public Optional<Shop> getShopByThreadAndLeague(String league, String thread) {
-        try {
-
-            return Optional.ofNullable(shopDao.getShopByThreadAndLeague(league, thread));
-
-        } catch (IndexOutOfBoundsException e) {
-            return Optional.empty();
-        }
-    }
 
 }

@@ -11,9 +11,4 @@ public interface ShopService {
 
     void saveOrUpdate(Shop shop);
 
-    Optional<Shop> getLatestIndexed(String league);
-
-    Optional<Shop> getShopByThreadAndLeague(String league, String thread);
-
-
 }

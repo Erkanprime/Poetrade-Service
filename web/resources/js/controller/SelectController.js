@@ -1,8 +1,6 @@
 
 App.controller('SelectController', ['$scope', 'PoeService', function($scope) {
-
-
-
+    
     $scope.modSelect = [
         "-- --",
         "# Life Regenerated per second",

@@ -13,19 +13,19 @@ public class Mod {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
     private Double miniValue;
 
-    @Column
     private Double maxiValue;
 
-    @Column
     private String modName;
 
-    public Mod(String modName, Double miniValue, Double maxiValue){
+    private Integer modOrder;
+
+    public Mod(String modName, Double miniValue, Double maxiValue, Integer modOrder){
         this.modName = modName;
         this.miniValue = miniValue;
         this.maxiValue = maxiValue;
+        this.modOrder = modOrder;
     }
 
     public Mod(){}
@@ -60,6 +60,14 @@ public class Mod {
 
     public Double getMiniValue() {
         return miniValue;
+    }
+
+    public Integer getModOrder() {
+        return modOrder;
+    }
+
+    public void setModOrder(Integer modOrder) {
+        this.modOrder = modOrder;
     }
 
     @Override

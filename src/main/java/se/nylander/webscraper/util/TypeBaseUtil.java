@@ -4,14 +4,13 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Created by erik.nylander on 2016-04-29.
  */
 public enum TypeBaseUtil {
 
-    Bow("Bow", new String[] { "Assassin Bow", "Bone Bow", "Citadel Bow", "Composite Bow", "Compound Bow", "Crude Bow", "Death Bow",
+    Bow("Bow", new String[]{"Assassin Bow", "Bone Bow", "Citadel Bow", "Composite Bow", "Compound Bow", "Crude Bow", "Death Bow",
             "Decimation Bow", "Decurve Bow", "Golden Flame", "Grove Bow", "Harbinger Bow", "Highborn Bow", "Imperial Bow", "Ivory Bow",
             "Long Bow", "Maraketh Bow", "Ranger Bow", "Recurve Bow", "Reflex Bow", "Royal Bow", "Short Bow", "Sniper Bow", "Spine Bow",
             "Steelwood Bow", "Thicket Bow"
@@ -19,26 +18,26 @@ public enum TypeBaseUtil {
     }),
 
     Claw("Claw",
-            new String[] { "Awl", "Blinder", "Cat's Paw", "Double Claw", "Eagle Claw", "Eye Gouger", "Fright Claw", "Gemini Claw", "Gouger",
+            new String[]{"Awl", "Blinder", "Cat's Paw", "Double Claw", "Eagle Claw", "Eye Gouger", "Fright Claw", "Gemini Claw", "Gouger",
                     "Great White Claw", "Gut Ripper", "Hellion's Paw", "Imperial Claw", "Nailed Fist", "Noble Claw", "Prehistoric Claw",
                     "Sharktooth Claw", "Sparkling Claw", "Terror Claw", "Thresher Claw", "Throat Stabber", "Tiger's Paw", "Timeworn Claw",
                     "Twin Claw", "Vaal Claw"
 
             }),
-    Dagger("Dagger", new String[] { "Ambusher", "Boot Blade", "Boot Knife", "Butcher Knife", "Carving Knife", "Copper Kris", "Demon Dagger",
+    Dagger("Dagger", new String[]{"Ambusher", "Boot Blade", "Boot Knife", "Butcher Knife", "Carving Knife", "Copper Kris", "Demon Dagger",
             "Ezomyte Dagger", "Fiend Dagger", "Flaying Knife", "Glass Shank", "Golden Kris", "Gutting Knife", "Imp Dagger",
             "Imperial Skean", "Platinum Kris", "Poignard", "Prong Dagger", "Royal Skean", "Sai", "Skean", "Skinning Knife",
             "Slaughter Knife", "Stiletto", "Trisula"
 
     }),
     OneHandAxe("One Hand Axe",
-            new String[] { "Arming Axe", "Boarding Axe", "Broad Axe", "Butcher Axe", "Ceremonial Axe", "Chest Splitter", "Cleaver",
+            new String[]{"Arming Axe", "Boarding Axe", "Broad Axe", "Butcher Axe", "Ceremonial Axe", "Chest Splitter", "Cleaver",
                     "Decorative Axe", "Engraved Hatchet", "Etched Hatchet", "Infernal Axe", "Jade Hatchet", "Jasper Axe", "Karui Axe",
                     "Reaver Axe", "Royal Axe", "Runic Hatchet", "Rusted Hatchet", "Siege Axe", "Spectral Axe", "Tomahawk", "Vaal Hatchet",
                     "War Axe", "Wraith Axe", "Wrist Chopper"
 
             }),
-    OneHandMace("One Hand Mace", new String[] {
+    OneHandMace("One Hand Mace", new String[]{
 
             "Ancestral Club", "Auric Mace", "Barbed Club", "Battle Hammer", "Behemoth Mace", "Bladed Mace", "Ceremonial Mace",
             "Dragon Mace", "Dream Mace", "Driftwood Club", "Flanged Mace", "Gavel", "Legion Hammer", "Nightmare Mace", "Ornate Mace",
@@ -46,7 +45,7 @@ public enum TypeBaseUtil {
             "War Hammer", "Wyrm Mace"
 
     }),
-    OneHandSword("One Hand Sword", new String[] {
+    OneHandSword("One Hand Sword", new String[]{
 
             "Ancient Sword", "Antique Rapier", "Apex Rapier", "Baselard", "Basket Rapier", "Battered Foil", "Battle Sword", "Broad Sword",
             "Burnished Foil", "Copper Sword", "Corsair Sword", "Courtesan Sword", "Cutlass", "Dragonbone Rapier", "Dragoon Sword",
@@ -58,32 +57,32 @@ public enum TypeBaseUtil {
 
     }),
     Sceptre("Sceptre",
-            new String[] { "Abyssal Sceptre", "Blood Sceptre", "Bronze Sceptre", "Carnal Sceptre", "Crystal Sceptre", "Darkwood Sceptre",
+            new String[]{"Abyssal Sceptre", "Blood Sceptre", "Bronze Sceptre", "Carnal Sceptre", "Crystal Sceptre", "Darkwood Sceptre",
                     "Driftwood Sceptre", "Grinning Fetish", "Horned Sceptre", "Iron Sceptre", "Karui Sceptre", "Lead Sceptre",
                     "Ochre Sceptre", "Opal Sceptre", "Platinum Sceptre", "Quartz Sceptre", "Ritual Sceptre", "Royal Sceptre",
                     "Sambar Sceptre", "Sekhem", "Shadow Sceptre", "Stag Sceptre", "Tyrant's Sekhem", "Vaal Sceptre", "Void Sceptre"
 
             }),
-    Staff("Staff", new String[] {
+    Staff("Staff", new String[]{
 
             "Coiled Staff", "Crescent Staff", "Eclipse Staff", "Ezomyte Staff", "Foul Staff", "Gnarled Branch", "Highborn Staff",
             "Imperial Staff", "Iron Staff", "Judgement Staff", "Lathi", "Long Staff", "Maelström Staff", "Military Staff", "Moon Staff",
-            "Primitive Staff", "Primordial Staff", "Quarterstaff", "Royal Staff", "Serpentine Staff", "Vile Staff", "Woodful Staff" }),
-    TwoHandAxe("Two Hand Axe", new String[] {
+            "Primitive Staff", "Primordial Staff", "Quarterstaff", "Royal Staff", "Serpentine Staff", "Vile Staff", "Woodful Staff"}),
+    TwoHandAxe("Two Hand Axe", new String[]{
 
             "Abyssal Axe", "Dagger Axe", "Despot Axe", "Double Axe", "Ezomyte Axe", "Fleshripper", "Gilded Axe", "Headsman Axe",
             "Jade Chopper", "Jasper Chopper", "Karui Chopper", "Labrys", "Noble Axe", "Poleaxe", "Shadow Axe", "Stone Axe", "Sundering Axe",
             "Talon Axe", "Timber Axe", "Vaal Axe", "Void Axe", "Woodsplitter"
 
     }),
-    TwoHandMace("Two Hand Mace", new String[] {
+    TwoHandMace("Two Hand Mace", new String[]{
 
             "Brass Maul", "Colossus Mallet", "Coronal Maul", "Dread Maul", "Driftwood Maul", "Fright Maul", "Great Mallet", "Imperial Maul",
             "Jagged Maul", "Karui Maul", "Mallet", "Meatgrinder", "Morning Star", "Piledriver", "Plated Maul", "Sledgehammer", "Solar Maul",
             "Spiny Maul", "Steelhead", "Terror Maul", "Totemic Maul", "Tribal Maul"
 
     }),
-    TwoHandSword("Two Hand Sword", new String[] {
+    TwoHandSword("Two Hand Sword", new String[]{
 
             "Bastard Sword", "Butcher Sword", "Corroded Blade", "Curved Blade", "Engraved Greatsword", "Etched Greatsword",
             "Exquisite Blade", "Ezomyte Blade", "Footman Sword", "Headman's Sword", "Highland Blade", "Infernal Sword", "Lion Sword",
@@ -91,12 +90,12 @@ public enum TypeBaseUtil {
             "Vaal Greatsword", "Wraith Sword"
 
     }),
-    Wand("Wand", new String[] {
+    Wand("Wand", new String[]{
 
             "Carved Wand", "Crystal Wand", "Demon's Horn", "Driftwood Wand", "Engraved Wand", "Faun's Horn", "Goat's Horn", "Heathen Wand",
             "Imbued Wand", "Omen Wand", "Opal Wand", "Pagan Wand", "Profane Wand", "Prophecy Wand", "Quartz Wand", "Sage Wand",
-            "Serpent Wand", "Spiraled Wand", "Tornado Wand" }),
-    BodyArmour("Body Armour", new String[] {
+            "Serpent Wand", "Spiraled Wand", "Tornado Wand"}),
+    BodyArmour("Body Armour", new String[]{
 
             "Arena Plate", "Assassin's Garb", "Astral Plate", "Battle Lamellar", "Battle Plate", "Blood Raiment", "Bone Armour",
             "Bronze Plate", "Buckskin Tunic", "Cabalist Regalia", "Carnal Armour", "Chain Hauberk", "Chainmail Doublet", "Chainmail Tunic",
@@ -113,8 +112,8 @@ public enum TypeBaseUtil {
             "Scale Vest", "Scarlet Raiment", "Scholar's Robe", "Sentinel Jacket", "Shabby Jerkin", "Sharkskin Tunic", "Silk Robe",
             "Silken Garb", "Silken Vest", "Silken Wrap", "Simple Robe", "Sleek Coat", "Soldier's Brigandine", "Spidersilk Robe",
             "Strapped Leather", "Sun Leather", "Sun Plate", "Thief's Garb", "Triumphant Lamellar", "Vaal Regalia", "Varnished Coat",
-            "War Plate", "Waxed Garb", "Widowsilk Robe", "Wild Leather", "Wyrmscale Doublet", "Zodiac Leather" }),
-    Boots("Boots", new String[] {
+            "War Plate", "Waxed Garb", "Widowsilk Robe", "Wild Leather", "Wyrmscale Doublet", "Zodiac Leather"}),
+    Boots("Boots", new String[]{
 
             "Ambush Boots", "Ancient Greaves", "Antique Greaves", "Arcanist Slippers", "Assassin's Boots", "Bronzescale Boots",
             "Carnal Boots", "Chain Boots", "Clasped Boots", "Conjurer Boots", "Crusader Boots", "Deerskin Boots", "Dragonscale Boots",
@@ -126,7 +125,7 @@ public enum TypeBaseUtil {
             "Vaal Greaves", "Velvet Slippers", "Wool Shoes", "Wrapped Boots", "Wyrmscale Boots", "Zealot Boots"
 
     }),
-    Gloves("Gloves", new String[] {
+    Gloves("Gloves", new String[]{
 
             "Ambush Mitts", "Ancient Gauntlets", "Antique Gauntlets", "Arcanist Gloves", "Assassin's Mitts", "Bronze Gauntlets",
             "Bronzescale Gauntlets", "Carnal Mitts", "Chain Gloves", "Clasped Mitts", "Conjurer Gloves", "Crusader Gloves",
@@ -139,7 +138,7 @@ public enum TypeBaseUtil {
             "Zealot Gloves"
 
     }),
-    Helmet("Helmet", new String[] {
+    Helmet("Helmet", new String[]{
 
             "Aventail Helmet", "Barbute Helmet", "Battered Helm", "Bone Circlet", "Callous Mask", "Close Helmet", "Cone Helmet",
             "Crusader Helmet", "Deicide Mask", "Eternal Burgonet", "Ezomyte Burgonet", "Fencer Helm", "Festival Mask", "Fluted Bascinet",
@@ -152,7 +151,7 @@ public enum TypeBaseUtil {
             "Ursine Pelt", "Vaal Mask", "Vine Circlet", "Visored Sallet", "Wolf Pelt", "Zealot Helmet"
 
     }),
-    Shield("Shield", new String[] {
+    Shield("Shield", new String[]{
 
             "Alder Spiked Shield", "Alloyed Spiked Shield", "Ancient Spirit Shield", "Angelic Kite Shield", "Archon Kite Shield",
             "Baroque Round Shield", "Battle Buckler", "Bone Spirit Shield", "Branded Kite Shield", "Brass Spirit Shield",
@@ -173,7 +172,7 @@ public enum TypeBaseUtil {
             "Twig Spirit Shield", "Vaal Buckler", "Vaal Spirit Shield", "Walnut Spirit Shield", "War Buckler", "Yew Spirit Shield"
 
     }),
-    Amulet("Amulet", new String[] {
+    Amulet("Amulet", new String[]{
 
             "Agate Amulet", "Amber Amulet", "Ashscale Talisman", "Avian Twins Talisman", "Black Maw Talisman", "Bonespire Talisman",
             "Breakrib Talisman", "Chrysalis Talisman", "Citrine Amulet", "Clutching Talisman", "Coral Amulet", "Deadhand Talisman",
@@ -184,12 +183,12 @@ public enum TypeBaseUtil {
             "Turquoise Amulet", "Undying Flesh Talisman", "Wereclaw Talisman", "Writhing Talisman"
 
     }),
-    Belt("Belt", new String[] {
+    Belt("Belt", new String[]{
 
             "Chain Belt", "Cloth Belt", "Golden Obi", "Heavy Belt", "Leather Belt", "Rustic Sash", "Studded Belt"
 
     }),
-    DivinationCard("Divination Card", new String[] {
+    DivinationCard("Divination Card", new String[]{
 
             "A Mother's Parting Gift", "Abandoned Wealth", "Anarchy's Price", "Assassin's Favour", "Audacity", "Birth of the Three",
             "Blind Venture", "Bowyer's Dream", "Chaotic Disposition", "Coveted Possession", "Death", "Doedre's Madness", "Earth Drinker",
@@ -209,11 +208,11 @@ public enum TypeBaseUtil {
             "The Sun", "The Surgeon", "The Surveyor", "The Survivalist", "The Thaumaturgist", "The Tower", "The Traitor", "The Trial",
             "The Twins", "The Union", "The Vast", "The Warden", "The Warlord", "The Watcher", "The Wind", "The Wolf's Shadow", "The Wrath",
             "Three Faces in the Dark", "Time-Lost Relic", "Tranquillity", "Treasure Hunter", "Turn the Other Cheek", "Vinia's Token",
-            "Volatile Power", "Wealth and Power"
+            "Volatile Power", "Wealth and Power","Destined to Crumble"
 
     }),
 
-    Flask("Flask", new String[] {
+    Flask("Flask", new String[]{
 
             "Amethyst Flask", "Aquamarine Flask", "Basalt Flask", "Bismuth Flask", "Colossal Hybrid Flask", "Colossal Life Flask",
             "Colossal Mana Flask", "Diamond Flask", "Divine Life Flask", "Divine Mana Flask", "Eternal Life Flask", "Eternal Mana Flask",
@@ -225,7 +224,7 @@ public enum TypeBaseUtil {
             "Stibnite Flask", "Sulphur Flask", "Topaz Flask"
 
     }),
-    Gem("Gem", new String[] { "Abyssal Cry", "Added Chaos Damage", "Added Cold Damage", "Added Fire Damage", "Added Lightning Damage",
+    Gem("Gem", new String[]{"Abyssal Cry", "Added Chaos Damage", "Added Cold Damage", "Added Fire Damage", "Added Lightning Damage",
             "Additional Accuracy", "Ancestral Protector", "Anger", "Animate Guardian", "Animate Weapon", "Arc", "Arctic Armour",
             "Arctic Breath", "Assassin's Mark", "Ball Lightning", "Ball Lightning", "Barrage", "Bear Trap", "Blade Vortex", "Bladefall",
             "Blasphemy", "Blast Rain", "Blind", "Blink Arrow", "Block Chance Reduction", "Blood Magic", "Blood Rage", "Bloodlust",
@@ -266,11 +265,11 @@ public enum TypeBaseUtil {
             "Wrath"
 
     }),
-    Jewel("Jewel", new String[] {
+    Jewel("Jewel", new String[]{
             "Cobalt Jewel", "Crimson Jewel", "Viridian Jewel",
 
     }),
-    Map("Map", new String[] {
+    Map("Map", new String[]{
             "Abandoned Cavern Map", "Abyss Map", "Academy Map", "Arachnid Nest Map", "Arcade Map", "Arena Map", "Arid Lake Map",
             "Arsenal Map", "Bazaar Map", "Bog Map", "Canyon Map", "Catacomb Map", "Cells Map", "Cemetery Map", "Channel Map", "Chateau Map",
             "Colonnade Map", "Colosseum Map", "Conservatory Map", "Core Map", "Courtyard Map", "Coves Map", "Crematorium Map", "Crypt Map",
@@ -285,21 +284,31 @@ public enum TypeBaseUtil {
             "Wasteland Map", "Waterways Map", "Wharf Map"
 
     }),
-    Quiver("Quiver", new String[] {
+    Quiver("Quiver", new String[]{
             "Blunt Arrow Quiver", "Broadhead Arrow Quiver", "Conductive Quiver", "Cured Quiver", "Fire Arrow Quiver", "Heavy Quiver",
             "Light Quiver", "Penetrating Arrow Quiver", "Rugged Quiver", "Serrated Arrow Quiver", "Sharktooth Arrow Quiver",
             "Spike-Point Arrow Quiver", "Two-Point Arrow Quiver"
 
     }),
-    Ring("Ring", new String[] {
+    Ring("Ring", new String[]{
             "Amethyst Ring", "Coral Ring", "Diamond Ring", "Gold Ring", "Golden Hoop", "Iron Ring", "Moonstone Ring", "Paua Ring",
             "Prismatic Ring", "Ruby Ring", "Sapphire Ring", "Topaz Ring", "Two-Stone Ring", "Unset Ring"
 
     }),
-    VaalFragments("Vaal Fragments", new String[] {
+    VaalFragments("Vaal Fragments", new String[]{
             "Mortal Grief", "Mortal Hope", "Mortal Ignorance", "Mortal Rage", "Sacrifice at Dawn", "Sacrifice at Dusk",
             "Sacrifice at Midnight", "Sacrifice at Noon"
 
+    }),
+    Currency("Currency", new String[]{
+            "Albino Rhoa Feather", "Armourer's Scrap", "Blacksmith's Whetstone", "Blessed Orb", "Cartographer's Chisel",
+            "Chaos Orb", "Chromatic Orb", "Divine Orb", "Eternal Orb", "Exalted Orb", "Gemcutter's Prism",
+            "Glassblower's Bauble", "Jeweller's Orb", "Mirror of Kalandra", "Orb of Alchemy", "Orb of Alteration", "Orb of Augmentation",
+            "Orb of Chance", "Orb of Fusing", "Orb of Regret", "Orb of Scouring", "Orb of Transmutation", "Perandus Coin", "Portal Scroll",
+            "Regal Orb", "Scroll of Wisdom", "Vaal Orb"
+    }),
+    FishingRod("Fishing Rod", new String[] {
+       "Song of the Sirens"
     });
 
     private String type;
@@ -326,7 +335,7 @@ public enum TypeBaseUtil {
         this.base = base;
     }
 
-    public static Optional<String> getTypeForItem(String base){
+    public static Optional<String> getTypeForItem(String base) {
 
         return Arrays.asList(values()).stream()
                 .filter(e ->
@@ -335,23 +344,23 @@ public enum TypeBaseUtil {
                 .map(TypeBaseUtil::getType);
     }
 
-    public static Optional<String> getType(String typeLine){
+    public static Optional<String> getType(String typeLine) {
         return Arrays.asList(values()).stream()
-                    .filter(e ->
-                            Arrays.asList(e.getBase()).stream()
-                                    .anyMatch(b -> {
-                                        Pattern pattern = Pattern.compile(b);
-                                        Matcher matcher = pattern.matcher(typeLine);
-                                        return matcher.find();
-                    }))
-                    .map(TypeBaseUtil::getType)
-                    .findFirst();
+                .filter(e ->
+                        Arrays.asList(e.getBase()).stream()
+                                .anyMatch(b -> {
+                                    Pattern pattern = Pattern.compile(b);
+                                    Matcher matcher = pattern.matcher(typeLine);
+                                    return matcher.find();
+                                }))
+                .map(TypeBaseUtil::getType)
+                .findFirst();
     }
 
-    public static Optional<String> getBase(String typeLine){
-        for(TypeBaseUtil T : values()){
-            for(String base : T.getBase()){
-                if(typeLine.contains(base)){
+    public static Optional<String> getBase(String typeLine) {
+        for (TypeBaseUtil T : values()) {
+            for (String base : T.getBase()) {
+                if (typeLine.contains(base)) {
                     return Optional.of(base);
                 }
             }

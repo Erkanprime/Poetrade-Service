@@ -16,15 +16,13 @@ public class Requirement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
     private String reqName;
 
-    @Column
-    private Double reqValue;
+    private Integer reqValue;
 
     public Requirement(){}
 
-    public Requirement(String reqName, Double reqValue){
+    public Requirement(String reqName, Integer reqValue){
         this.reqName = reqName;
         this.reqValue = reqValue;
     }
@@ -45,11 +43,11 @@ public class Requirement {
         this.reqName = reqName;
     }
 
-    public Double getReqValue() {
+    public Integer getReqValue() {
         return reqValue;
     }
 
-    public void setReqValue(Double reqValue) {
+    public void setReqValue(Integer reqValue) {
         this.reqValue = reqValue;
     }
 }

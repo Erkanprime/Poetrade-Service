@@ -5,40 +5,40 @@ package se.nylander.webscraper.model.request;
  */
 public class SocketRequest {
 
-    private Double socketMinValue;
-    private Double socketMaxValue;
-    private Double linksMinValue;
-    private Double linksMaxValue;
+    private Integer socketMinValue;
+    private Integer socketMaxValue;
+    private Integer linksMinValue;
+    private Integer linksMaxValue;
 
-    public Double getSocketMinValue() {
+    public Integer getSocketMinValue() {
         return socketMinValue;
     }
 
-    public void setSocketMinValue(Double socketMinValue) {
+    public void setSocketMinValue(Integer socketMinValue) {
         this.socketMinValue = socketMinValue;
     }
 
-    public Double getSocketMaxValue() {
+    public Integer getSocketMaxValue() {
         return socketMaxValue;
     }
 
-    public void setSocketMaxValue(Double socketMaxValue) {
+    public void setSocketMaxValue(Integer socketMaxValue) {
         this.socketMaxValue = socketMaxValue;
     }
 
-    public Double getLinksMinValue() {
+    public Integer getLinksMinValue() {
         return linksMinValue;
     }
 
-    public void setLinksMinValue(Double linksMinValue) {
+    public void setLinksMinValue(Integer linksMinValue) {
         this.linksMinValue = linksMinValue;
     }
 
-    public Double getLinksMaxValue() {
+    public Integer getLinksMaxValue() {
         return linksMaxValue;
     }
 
-    public void setLinksMaxValue(Double linksMaxValue) {
+    public void setLinksMaxValue(Integer linksMaxValue) {
         this.linksMaxValue = linksMaxValue;
     }
 }

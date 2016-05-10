@@ -24,6 +24,7 @@ public final class ScraperConstants {
     public static final String ITEM_IDENTIFIED = "identified";
     public static final String ITEM_NAME = "name";
     public static final String ITEM_PROPERTIES = "properties";
+    public static final String ITEM_ILVL="ilvl";
 
     public static final String URL = "http://www.pathofexile.com";
 

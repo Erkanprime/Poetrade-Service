@@ -1,11 +1,113 @@
 
-.container{
-    margin-top: 15%;
-    margin-bottom: 15%;
+.customForm{
+    margin-bottom: 5%;
+    background-color: rgba(0, 0, 7, 0.9);
+    border-style: solid;
+    border-width: 3px;
+    border-color: azure;
+
 }
 .removeBtn:hover{
     opacity:0.8;
 }
 hr{
     height: 4px;
+}
+.showFormBtn {
+    margin-bottom:5%;
+
+}
+
+.innerForm {
+    margin-top:10%;
+    margin-bottom:10%;
+}
+
+.iconCell {
+    border-style: solid;
+    border-width: 3px;
+    border-color: azure;
+    background-color: rgba(62, 62, 70, 0.7);
+}
+.statsCell {
+    border-style: solid;
+    border-width: 3px;
+    border-color: azure;
+    font-size:15px;
+    color:white;
+}
+.resultRow {
+    height:350px;
+    background-color: rgba(0, 0, 7, 0.9);
+    border-style: solid;
+    border-width: 1px;
+    border-color: azure;
+}
+body {
+    background-image: url("poebackground.jpg");
+    font-family: "HelveticaNeueLT Pro 55 Roman";
+}
+h3 {
+    font-weight: bold;
+    color:#cec59f;
+}
+.customText{
+    color:#886A08;
+    font-size: 20px;
+}
+.displayImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+.searchButton {
+    background-color: #886A08;; /* Green */
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+}
+.searchButton:hover{
+    opacity:0.8;
+}
+.selectText {
+    font-size:18px;
+}
+.smallImg {
+    height:45px;
+    width:45px;
+}
+.mediumImg {
+    height:110px;
+    width:110px;
+}
+.mediumSmallImg {
+    height:80px;
+    width:80px;
+}
+.largeImg{
+    height:170px;
+    width:150px;
+}
+
+.white{
+    color:#eee;
+}
+.magic{
+    color:#5050EB;
+}
+.rare{
+   color:#a3a314;
+}
+.unique{
+    color:#af6025;
+}
+.requirements{
+    color:#999;
+}
+.gem{
+    color:#1ba29b;
 }

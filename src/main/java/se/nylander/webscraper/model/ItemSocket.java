@@ -13,10 +13,8 @@ public class ItemSocket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "COLOUR", nullable = true)
     private String colour;
 
-    @Column(name = "GROUP_ID", nullable = true)
     private Integer groupId;
 
     public ItemSocket(String color, Integer groupId){
@@ -52,4 +50,19 @@ public class ItemSocket {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ItemSocket that = (ItemSocket) o;
+
+        return groupId != null ? groupId.equals(that.groupId) : that.groupId == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return  31 * (groupId != null ? groupId.hashCode() : 0);
+    }
 }

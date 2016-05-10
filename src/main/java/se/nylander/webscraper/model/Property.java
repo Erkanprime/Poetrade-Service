@@ -13,30 +13,15 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
     private String propName;
 
-    @Column
     private Double miniValue;
 
-    @Column
     private Double maxiValue;
 
-    @Column
     private String textValue;
 
-    @Column
-    private Boolean isNumberValue;
-
     public Property(){}
-
-    public Boolean getNumberValue() {
-        return isNumberValue;
-    }
-
-    public void setNumberValue(Boolean numberValue) {
-        isNumberValue = numberValue;
-    }
 
     public String getTextValue() {
         return textValue;

@@ -15,26 +15,18 @@ public class Shop implements Serializable{
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "SHOP_ID", nullable = false)
     private Long id;
 
-    @Column(name = "SHOP_NAME")
     private String shopName;
 
-    @Column(name = "SHOP_OWNER")
     private String shopOwner;
 
-    @Column(name = "LAST_EDITED")
     private String lastEdited;
 
-    @Column(name = "THREAD_LINK")
     private String threadLink;
 
-    @Column(name = "TIME_OF_INDEXED", nullable = false)
     private LocalDateTime timeOfIndexed;
 
-    @Column(name = "LEAGUE")
     private String league;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

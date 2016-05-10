@@ -1,5 +1,6 @@
 package se.nylander.webscraper.model.response;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,23 +12,19 @@ public class TradeItemResponse {
     private String name;
     private String type;
     private String base;
-    private Double quality;
     private String shopOwner;
     private String price;
-    private Double dps;
-    private Double aps;
-    private Double levelReq;
-    private Double armour;
-    private Double energyshield;
-    private Double evasion;
-    private Double strengthReq;
-    private Double dexterityReq;
-    private Double intelligenceReq;
-    private String flavourText;
+    private Double pDps;
+    private Double eDps;
     private Boolean corrupted;
     private Boolean verified;
     private Boolean identified;
+    private Integer ilvl;
+    private Integer rarity;
     private List<String> mods;
+    private HashMap<String, String> properties;
+    private HashMap<String, Integer> requirements;
+    private List<SocketResponse> sockets;
 
     public String getIcon() {
         return icon;
@@ -61,14 +58,6 @@ public class TradeItemResponse {
         this.base = base;
     }
 
-    public Double getQuality() {
-        return quality;
-    }
-
-    public void setQuality(Double quality) {
-        this.quality = quality;
-    }
-
     public String getShopOwner() {
         return shopOwner;
     }
@@ -85,84 +74,20 @@ public class TradeItemResponse {
         this.price = price;
     }
 
-    public Double getDps() {
-        return dps;
+    public Double getpDps() {
+        return pDps;
     }
 
-    public void setDps(Double dps) {
-        this.dps = dps;
+    public void setpDps(Double pDps) {
+        this.pDps = pDps;
     }
 
-    public Double getAps() {
-        return aps;
+    public Double geteDps() {
+        return eDps;
     }
 
-    public void setAps(Double aps) {
-        this.aps = aps;
-    }
-
-    public Double getLevelReq() {
-        return levelReq;
-    }
-
-    public void setLevelReq(Double levelReq) {
-        this.levelReq = levelReq;
-    }
-
-    public Double getArmour() {
-        return armour;
-    }
-
-    public void setArmour(Double armour) {
-        this.armour = armour;
-    }
-
-    public Double getEnergyshield() {
-        return energyshield;
-    }
-
-    public void setEnergyshield(Double energyshield) {
-        this.energyshield = energyshield;
-    }
-
-    public Double getEvasion() {
-        return evasion;
-    }
-
-    public void setEvasion(Double evasion) {
-        this.evasion = evasion;
-    }
-
-    public Double getStrengthReq() {
-        return strengthReq;
-    }
-
-    public void setStrengthReq(Double strengthReq) {
-        this.strengthReq = strengthReq;
-    }
-
-    public Double getDexterityReq() {
-        return dexterityReq;
-    }
-
-    public void setDexterityReq(Double dexterityReq) {
-        this.dexterityReq = dexterityReq;
-    }
-
-    public Double getIntelligenceReq() {
-        return intelligenceReq;
-    }
-
-    public void setIntelligenceReq(Double intelligenceReq) {
-        this.intelligenceReq = intelligenceReq;
-    }
-
-    public String getFlavourText() {
-        return flavourText;
-    }
-
-    public void setFlavourText(String flavourText) {
-        this.flavourText = flavourText;
+    public void seteDps(Double eDps) {
+        this.eDps = eDps;
     }
 
     public List<String> getMods() {
@@ -195,5 +120,45 @@ public class TradeItemResponse {
 
     public void setIdentified(Boolean identified) {
         this.identified = identified;
+    }
+
+    public HashMap<String, String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(HashMap<String, String> properties) {
+        this.properties = properties;
+    }
+
+    public HashMap<String, Integer> getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(HashMap<String, Integer> requirements) {
+        this.requirements = requirements;
+    }
+
+    public Integer getIlvl() {
+        return ilvl;
+    }
+
+    public void setIlvl(Integer ilvl) {
+        this.ilvl = ilvl;
+    }
+
+    public List<SocketResponse> getSockets() {
+        return sockets;
+    }
+
+    public void setSockets(List<SocketResponse> sockets) {
+        this.sockets = sockets;
+    }
+
+    public Integer getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(Integer rarity) {
+        this.rarity = rarity;
     }
 }
