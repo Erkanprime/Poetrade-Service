@@ -23,7 +23,7 @@ public class JsonParser {
     public JsonParser() {
     }
 
-    public Optional<List<TradeItem>> processJsonItemDataString(String dirtyJson) {
+    public List<TradeItem> processJsonItemDataString(String dirtyJson) {
         String json;
         try {
             json = dirtyJson.substring(dirtyJson.indexOf("[["), dirtyJson.indexOf(")).run"));
@@ -52,7 +52,7 @@ public class JsonParser {
         return jsonParsing(items);
     }
 
-    private static Optional<List<TradeItem>> jsonParsing(List<String> cleanJson) {
+    private static List<TradeItem> jsonParsing(List<String> cleanJson) {
         List<TradeItem> tradeItems = new ArrayList<>();
 
         cleanJson.stream().forEach(item -> {
@@ -79,7 +79,7 @@ public class JsonParser {
             tradeItems.add(tradeItem);
 
         });
-        return Optional.of(tradeItems);
+        return tradeItems;
     }
 
     // Check if typeline contains >>

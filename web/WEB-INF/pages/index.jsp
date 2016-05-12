@@ -42,6 +42,8 @@
                         <option value="Perandus">Perandus</option>
                         <option value="Hardcore">Hardcore</option>
                         <option value="Standard">Standard</option>
+                        <option value="Hardcore">Perandus Flashback HC</option>
+                        <option value="Standard">Perandus Flashback</option>
                     </select>
 
                 </div>
@@ -342,7 +344,15 @@
     <table class="col-lg-12">
         <tr class="resultRow" ng-repeat="response in tradeitemResponse">
             <td class="iconCell col-lg-2">
-                <span><img ng-class="getImgSize(response.type)" class="displayImage" src="{{response.icon}}"></span>
+            <div style="position: relative; left: 0; top: 0;">
+                <img class="displayImage" src="{{response.icon}}">
+                <div style="position: absolute; left: -20; top: 0;">
+                    <div ng-repeat="socket in response.sockets"
+                         ng-class="getSocketColour(socket.colour) + ' ' + getSocketPosition($index)">
+                        <div ng-class="isLinkedWithPrevious(socket.groupId, $index)"></div>
+                    </div>
+                </div>
+            </div>
             </td>
             <td class="statsCell col-lg-4">
                 <h2 ng-class="getRarity(response.rarity)">{{response.name}}</h2>
@@ -355,6 +365,7 @@
                 <p ng-repeat="mod in response.mods">{{mod}}</p>
                 <h2 ng-show="!response.identified" class="ng-hide" style="color:red;">Unidentified</h2>
                 <h2 ng-show="response.corrupted" class="ng-hide" style="color:red;">Corrupted</h2>
+                <h3>Itemlevel: {{response.ilvl}}</h3>
             </td>
             <td class="statsCell col-lg-4">
                 <h2>Physical Damage: {{response.pDps}}</h2>
@@ -363,7 +374,8 @@
                 <p ng-repeat="(key,val) in response.properties"> {{key}}{{val=='' ? ' ' : ':'}} {{val}}</p>
                 <p> {{response.base}}</p>
                 <hr>
-                <h4>Owner: {{response.shopOwner}}</h4>
+                <h3>Price: {{response.price}}</h3>
+                <h3>Owner: {{response.shopOwner}}</h3>
             </td>
         </tr>
     </table>

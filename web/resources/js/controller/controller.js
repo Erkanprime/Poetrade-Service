@@ -99,12 +99,13 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
     };
 
     $scope.addNewMod = function() {
-
-        $scope.tradeitem.mods.push({
-            name:"-- --",
-            minValue: null,
-            maxValue: null
-        });
+        if($scope.tradeitem.mods.length < 10){
+            $scope.tradeitem.mods.push({
+                name:"-- --",
+                minValue: null,
+                maxValue: null
+            });
+        }    
     };
 
     $scope.removeMod = function(index) {
@@ -143,6 +144,9 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
             }
         });
         
+        if($scope.tradeitemCopy.name == ""){
+            $scope.tradeitemCopy.name = null;
+        }
 
         if($scope.tradeitemCopy.corrupted == 'Either'){
             $scope.tradeitemCopy.corrupted = null;
@@ -268,5 +272,77 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
         
         return 'Gem';
     };
+
+    $scope.getSocketColour = function (colour) {
+        if(colour == 'Red'){
+            return 'socketStr';
+        }
+        if(colour == 'Blue'){
+            return 'socketInt';
+        }
+        if(colour == 'Green'){
+            return 'socketDex';
+        }
+        if(colour == 'White'){
+            return 'socketCor';
+        }
+    };
     
+    $scope.getSocketPosition = function (index) {
+        if(index == 0){
+            return 'socket1';
+        }
+        if(index == 1){
+            return 'socket2';
+        }
+        if(index == 2){
+            return 'socket3';
+        }
+        if(index == 3){
+            return 'socket4';
+        }
+        if(index == 4){
+            return 'socket5';
+        }
+        if(index == 5){
+            return 'socket6';
+        }
+    };
+
+    $scope.previousGroupId = null;
+
+    $scope.isLinkedWithPrevious = function (id, index) {
+
+        if(index > 0){
+            if($scope.previousGroupId == id){
+                $scope.previousGroupId = id;
+                if(index == 1){
+
+                    return 'linkHori linkHori1';
+                }
+                if(index == 2){
+
+                    return 'linkVerti linkVerti1';
+                }
+                if(index == 3){
+                    
+                    return 'linkHori linkHori2'
+                }
+                if(index == 4){
+                    
+                    return 'linkVerti linkVerti2';
+                }
+                if(index == 5){
+                    
+                    return 'linkHori linkHori3';
+                }
+            }
+            
+        }
+
+        $scope.previousGroupId = id;
+
+
+    };
+
 }]);

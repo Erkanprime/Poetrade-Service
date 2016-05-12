@@ -14,7 +14,7 @@ public final class ScraperConstants {
     public static final String ITEM_REQUIRMENT = "requirements";
     public static final String ITEM_IMPLICIT_MODS = "implicitMods";
     public static final String ITEM_EXPLICIT_MODS = "explicitMods";
-
+    public static final String PRICE_REGEX = "~[a-zA-Z]\\/[a-zA-Z]\\s\\d+\\s[a-zA-Z]+|\\d+\\s[a-zA-Z]+";
     public static final String ITEM_CRAFTED_MODS = "craftedMods";
 
     public static final String ITEM_SOCKETS = "sockets";

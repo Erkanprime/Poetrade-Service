@@ -1,14 +1,15 @@
 package se.nylander.webscraper.parser.jsoup;
 
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import se.nylander.webscraper.util.ScraperConstants;
 import se.nylander.webscraper.model.Shop;
 import se.nylander.webscraper.parser.jsoup.util.DocUtil;
 import se.nylander.webscraper.service.ShopService;
+import se.nylander.webscraper.util.ScraperConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +24,8 @@ public class ForumLeagueParser {
 
     private HashMap<String, String> forumLinks = new HashMap<>();
 
-    private static Logger log = Logger.getLogger(ForumLeagueParser.class);
+    private static Logger log = LoggerFactory.getLogger(ForumLeagueParser.class);
+
 
     @Autowired
     @Qualifier("forumThreadParser")
@@ -33,7 +35,8 @@ public class ForumLeagueParser {
     @Qualifier("shopService")
     private ShopService shopService;
 
-    public ForumLeagueParser(){}
+    public ForumLeagueParser() {
+    }
 
     /**
      * Fetches all trading-shop-league urls
@@ -45,7 +48,7 @@ public class ForumLeagueParser {
             final Elements forumLinksElements = doc.getElementsByClass("forum_name").select("div.name");
 
             forumLinksElements.stream()
-                    .filter(name -> name.text().contains("Shops"))
+                    .filter(name -> name.text().contains("Shops") || name.text().contains("Two-Week"))
                     .forEach(link -> {
                         String name = link.text();
                         String href = link.getElementsByAttribute("href").get(0).attributes().get("href");
@@ -53,7 +56,8 @@ public class ForumLeagueParser {
                     });
 
         } catch (IOException e) {
-            log.warn("Coulden't parse: " + ScraperConstants.URL + "/forum\n", e);;
+            log.warn("Coulden't parse: " + ScraperConstants.URL + "/forum\n", e);
+            ;
         }
     }
 
@@ -70,18 +74,17 @@ public class ForumLeagueParser {
         List<String> shopLinks = new ArrayList<>();
 
 
-
         for (Map.Entry<String, String> entry : forumLinks.entrySet()) {
             final String league = entry.getKey();
             final String href = entry.getValue();
             Integer amountOfPages = league.equals(ScraperConstants.STANDARD_HARDCORE_LEAGUE)
-                    || league.equals(ScraperConstants.STANDARD_LEAGUE) ? 2 : 4; //Mycket mindre indexering behövs på permantenta ligor
+                    || league.equals(ScraperConstants.STANDARD_LEAGUE) ? 1 : 2; //Mycket mindre indexering behövs på permantenta ligor
 
-            for (int pageNumber=1; pageNumber < amountOfPages; pageNumber++) {
+            for (int pageNumber = 1; pageNumber <= amountOfPages; pageNumber++) {
 
 
                 log.info("###############################################");
-                log.info("####### Processing league: " + href + "/page/" + pageNumber);
+                log.info("####### Processing league: " + league + "#### " + href + "/page/" + pageNumber);
                 log.info("###############################################");
 
                 try {
@@ -103,7 +106,7 @@ public class ForumLeagueParser {
                             indexedShops.add(forumThreadParser.readForumLinksShops(shopLink));
 
                         } catch (Exception e) {
-                            log.warn("Couldent parse/connect to Thread: " + ScraperConstants.URL + shopLink + "\n", e);
+                            log.warn("Couldent parse/connect to Thread: " + ScraperConstants.URL + shopLink + "\n" + e.getLocalizedMessage());
                         }
                     }
 

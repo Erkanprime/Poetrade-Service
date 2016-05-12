@@ -25,20 +25,20 @@ hr{
 
 .iconCell {
     border-style: solid;
-    border-width: 3px;
+    border-width: 1px;
     border-color: azure;
-    background-color: rgba(62, 62, 70, 0.7);
+    background-color: rgba(89, 83, 90, 0.65);
 }
 .statsCell {
     border-style: solid;
-    border-width: 3px;
+    border-width: 1px;
     border-color: azure;
     font-size:15px;
     color:white;
 }
 .resultRow {
     height:350px;
-    background-color: rgba(0, 0, 7, 0.9);
+    background-color: rgba(37, 37, 39, 0.89);
     border-style: solid;
     border-width: 1px;
     border-color: azure;
@@ -56,9 +56,13 @@ h3 {
     font-size: 20px;
 }
 .displayImage{
-    display: block;
+    position: relative;
     margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle
+
 }
 .searchButton {
     background-color: #886A08;; /* Green */
@@ -111,3 +115,109 @@ h3 {
 .gem{
     color:#1ba29b;
 }
+.socketInt{
+    background-image: url("socketInt.png");
+    width: 47px;
+    height: 47px;
+}
+.socketDex{
+    background-image: url("socketDex.png");
+    width: 47px;
+    height: 47px;
+}
+.socketStr{
+    background-image: url("socketStr.png");
+    width: 47px;
+    height: 47px;
+}
+.socketCor{
+    background-image: url("socketCor.png");
+    width: 47px;
+    height: 47px;
+}
+.linkHori{
+    background-image: url("linkHorizontal.png");
+    width: 38px;
+    height: 16px;
+}
+.linkVerti{
+    background-image: url("linkVertical.png");
+    width: 16px;
+    height: 38px;
+}
+
+.linkHori1{
+    z-index: 1000;
+    position: absolute;
+    top: 15px;
+    left: -20px;
+}
+.linkHori2{
+    z-index: 1000;
+    position: absolute;
+    top: 15px;
+    left: 30px;
+}
+.linkHori3{
+    z-index: 1000;
+    position: absolute;
+    top: 15px;
+    left: -20px;
+}
+.linkVerti1{
+    z-index: 1000;
+    position: absolute;
+    top: -20px;
+    left: 15px;
+}
+.linkVerti2{
+    z-index: 1000;
+    position: absolute;
+    top: -20px;
+    left: 15px;
+}
+
+
+.socket1{
+    z-index: 1000;
+    position: absolute;
+    top: 0px;
+    left: 70px;
+}
+.socket2{
+    z-index: 1000;
+    position: absolute;
+    top: 0px;
+    left: 120px;
+}
+.socket3{
+    z-index: 1000;
+    position: absolute;
+    top: 50px;
+    left: 120px;
+}
+.socket4{
+    z-index: 1000;
+    position: absolute;
+    top: 50px;
+    left: 70px;
+}
+.socket5{
+    z-index: 1000;
+    position: absolute;
+    top: 100px;
+    left: 70px;
+}
+.socket6{
+    z-index: 1000;
+    position: absolute;
+    top: 100px;
+    left: 120px;
+}
+.icon{
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+
