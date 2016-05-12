@@ -1,6 +1,7 @@
 package se.nylander.webscraper.dao.imp;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import se.nylander.webscraper.dao.TradeItemDao;
 import se.nylander.webscraper.model.*;
 import se.nylander.webscraper.model.request.ModRequest;
@@ -18,6 +19,7 @@ import java.util.Optional;
  * Created by erik.nylander on 2016-04-04.
  */
 @Repository
+@Transactional
 public class TradeItemDaoImp implements TradeItemDao{
 
     private static final Double defaultMin = 0d;

@@ -14,7 +14,7 @@ App.factory('PoeService', ['$http', '$q', function($http, $q){
                     }
                 );
         }
-        
+
     };
 
 }]);

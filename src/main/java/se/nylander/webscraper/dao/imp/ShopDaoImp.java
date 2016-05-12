@@ -21,25 +21,8 @@ public class ShopDaoImp implements ShopDao{
     public void save(Shop shop) {
 
         em.persist(shop);
-      //  em.getEntityManagerFactory().getCache().evictAll();
     }
 
-    @Override
-    public Shop getLatestIndexed(String league) {
-        Query q = em.createQuery("Select s from Shop s where s.league = :league order by s.timeOfIndexed desc", Shop.class);
-        q.setParameter("league", league);
-        q.setMaxResults(1);
-        return (Shop) q.getResultList().get(0);
-    }
-
-    @Override
-    public Shop getShopByThreadAndLeague(String league, String thread) {
-        Query q = em.createQuery("Select s from Shop s where s.league = :league and s.threadLink = :threadLink", Shop.class);
-        q.setParameter("league", league);
-        q.setParameter("threadLink", thread);
-        q.setMaxResults(1);
-        return (Shop) q.getResultList().get(0);
-    }
 
     @Override
     public void update(Shop shop) {

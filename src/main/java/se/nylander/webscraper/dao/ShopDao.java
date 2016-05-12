@@ -9,9 +9,5 @@ public interface ShopDao {
 
     void save(Shop shop);
 
-    Shop getLatestIndexed(String league);
-
-    Shop getShopByThreadAndLeague(String league, String thread);
-
     void update(Shop shop);
 }
