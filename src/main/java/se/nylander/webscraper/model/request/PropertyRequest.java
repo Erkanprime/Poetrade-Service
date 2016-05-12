@@ -1,9 +1,14 @@
 package se.nylander.webscraper.model.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+
 /**
  * Created by erik.nylander on 2016-04-28.
  */
 public class PropertyRequest {
+
     private String name;
     private Double minValue;
     private Double maxValue;
@@ -31,4 +36,5 @@ public class PropertyRequest {
     public void setMaxValue(Double maxValue) {
         this.maxValue = maxValue;
     }
+
 }

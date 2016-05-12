@@ -1,6 +1,9 @@
 package se.nylander.webscraper.model.request;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -21,10 +24,15 @@ public class TradeItemRequest {
     private Integer rarity;
     private Integer minIlvl;
     private Integer maxIlvl;
+
     private SocketRequest sockets;
+
     private List<RequirementRequest> requirements;
+
     private List<PropertyRequest> properties;
+
     private List<ModRequest> mods;
+
 
     public Integer getRarity() {
         return rarity;

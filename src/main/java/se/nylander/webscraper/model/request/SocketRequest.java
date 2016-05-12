@@ -1,9 +1,17 @@
 package se.nylander.webscraper.model.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created by erik.nylander on 2016-04-28.
  */
 public class SocketRequest {
+
 
     private Integer socketMinValue;
     private Integer socketMaxValue;
@@ -41,4 +49,5 @@ public class SocketRequest {
     public void setLinksMaxValue(Integer linksMaxValue) {
         this.linksMaxValue = linksMaxValue;
     }
+
 }

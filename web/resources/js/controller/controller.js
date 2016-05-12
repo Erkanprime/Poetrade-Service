@@ -4,6 +4,12 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
     $scope.tradeitemResponse=[];
     $scope.tradeitemCopy={};
 
+    $scope.userLogin ={
+        username:null,
+        password:null
+    };
+    $scope.signedIn = false;
+    
     $scope.tradeitem={
      league: "Hardcore Perandus",
      name: null,
@@ -117,6 +123,7 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
         $scope.tradeitem.base = 'any';
     };
 
+    
     $scope.searchTradeItem = function(){
         $scope.prepareTradeItem();
         PoeService.search($scope.tradeitemCopy)
@@ -132,6 +139,37 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
             );
     };
 
+
+    $scope.userSignUp = function(){
+        console.log($scope.userLogin);
+        PoeService.signUp($scope.userLogin)
+            .then(
+                function(d) {
+                    $scope.signedIn = true;
+                },
+                function(errResponse){
+                    console.error('Error while Signing in');
+                }
+            );
+    };
+
+
+
+    $scope.userSignIn = function(){
+        console.log($scope.userLogin);
+        PoeService.login($scope.userLogin)
+            .then(
+                function(d) {
+                    $scope.signedIn = true;
+                },
+                function(errResponse){
+                    console.error('Error while logging in');
+                }
+            );
+    };
+    
+    
+    
     $scope.prepareTradeItem = function(){
         $scope.tradeitemCopy = angular.copy($scope.tradeitem);
         $scope.tradeitemCopy.mods = [];

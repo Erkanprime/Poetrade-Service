@@ -24,12 +24,15 @@
     <link rel="stylesheet" href="<c:url value='/resources/css.css'/>">
 </head>
 <body ng-app="myApp" ng-controller="FormController">
-<div class="container" style="margin-top: 15%;">
+
+<div class="container" style="margin-top: 10%;">
     <button ng-click="hideForm()" ng-show="formFlag" class="col-lg-12 showFormBtn ng-hide btn btn-default"><h4>Hide
         form</h4></button>
     <button ng-click="showForm()" ng-show="!formFlag" class="col-lg-12 showFormBtn ng-hide btn btn-default"><h4>Show
         form</h4></button>
 </div>
+
+
 <div class="container customForm">
     <div ng-show="formFlag" class="ng-hide innerForm">
         <form class="form-horizontal">
@@ -329,7 +332,7 @@
             <br>
             <button style="float:left; margin-right:10%; margin-top:5%; margin-bottom:10%;"
                     type="button" ng-click="showObject()" class="btn btn-default">
-                Test
+                test
             </button>
             <button style="float:right; margin-right:10%; margin-top:5%; margin-bottom:10%;" type="button" ng-click="searchTradeItem()"
                     class="btn searchButton">Search

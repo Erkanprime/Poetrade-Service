@@ -9,6 +9,7 @@ import se.nylander.webscraper.model.*;
 import se.nylander.webscraper.util.ScraperConstants;
 import se.nylander.webscraper.util.TypeBaseUtil;
 
+import java.security.Principal;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.regex.Matcher;

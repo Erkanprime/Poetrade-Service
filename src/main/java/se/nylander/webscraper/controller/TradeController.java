@@ -1,8 +1,12 @@
 package se.nylander.webscraper.controller;
 
+import jdk.nashorn.internal.runtime.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +24,7 @@ import java.util.List;
 
 
 @Controller
-public class TestController {
+public class TradeController {
 
     @Autowired
     @Qualifier("tradeService")
@@ -28,15 +32,26 @@ public class TestController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
-    public List<TradeItemResponse> search(@RequestBody TradeItemRequest tradeItemRequest){
-        List<TradeItemResponse> result = new ArrayList<>();
-        result = tradeItemService.search(tradeItemRequest);
-        return result;
+    public ResponseEntity<List<TradeItemResponse>> search(@RequestBody TradeItemRequest tradeItemRequest){
+        List<TradeItemResponse> result = tradeItemService.search(tradeItemRequest);
+        ResponseEntity<List<TradeItemResponse>> responseEntity;
+
+        if(result.isEmpty()){
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+
+        return responseEntity;
     }
+
+
+
 
     @RequestMapping("/")
     public String home() {
         return "index";
     }
+
 
 }
