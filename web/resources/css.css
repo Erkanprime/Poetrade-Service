@@ -219,3 +219,16 @@ h3 {
     left: 0;
     top: 0;
 }
+.modBtn{
+    text-align:left;
+    background-color: #E2E7EA;
+    color: black;
+    border-bottom-color: white;
+    margin-bottom:20px;
+}
+.ulMod{
+    height: 300px;
+    overflow: auto;
+    min-width: 500px;
+    margin-left: 5%;
+}

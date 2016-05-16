@@ -45,8 +45,8 @@
                         <option value="Perandus">Perandus</option>
                         <option value="Hardcore">Hardcore</option>
                         <option value="Standard">Standard</option>
-                        <option value="Hardcore">Perandus Flashback HC</option>
-                        <option value="Standard">Perandus Flashback</option>
+                        <option value="Perandus Flashback HC">Perandus Flashback HC</option>
+                        <option value="Perandus Flashback">Perandus Flashback</option>
                     </select>
 
                 </div>
@@ -236,9 +236,16 @@
                 <fieldset data-ng-repeat="mod in tradeitem.mods">
 
                     <div class="col-lg-6" ng-controller="SelectController">
-                        <select style="margin-bottom:20px;" class="form-control selectText" ng-model="mod.name"
+                        <!--<select style="margin-bottom:20px;" class="form-control selectText" ng-model="mod.name"
                                 ng-options="mods for mods in modSelect"></select>
+                        -->
 
+                            <button class="modBtn col-lg-12 btn dropdown-toggle selectText" type="button" data-toggle="dropdown">{{mod.name}}
+                                <span style="float:right;" class="caret"></span></button>
+                            <ul class="dropdown-menu ulMod">
+                                <li style="padding-left: 10px; padding-top: 10px;"><input ng-model="search" type="text" placeholder="search.."></li>
+                                <li ng-click="mod.name = mods" style="padding-left: 10px; font-size:16px;" ng-repeat="mods in modSelect | filter : search">{{mods}}</li>
+                            </ul>
                     </div>
 
                     <div class="col-lg-6">
@@ -267,7 +274,7 @@
 
                 <br>
                 <button ng-click="addNewMod()" id="addmod" type="button" class="btn btn-default"
-                        style="font-size:16px;">Add mod
+                        style="font-size:16px;">Add mod <span class="glyphicon glyphicon-plus"></span>
                 </button>
 
             </div>
@@ -328,7 +335,6 @@
                     </div>
                 </div>
             </div>
-            <hr>
             <br>
             <button style="float:left; margin-right:10%; margin-top:5%; margin-bottom:10%;"
                     type="button" ng-click="showObject()" class="btn btn-default">
