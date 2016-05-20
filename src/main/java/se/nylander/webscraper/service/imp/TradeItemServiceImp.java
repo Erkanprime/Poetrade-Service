@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import se.nylander.webscraper.dao.TradeItemDao;
 import se.nylander.webscraper.model.*;
+import se.nylander.webscraper.model.request.ModRequest;
 import se.nylander.webscraper.model.request.TradeItemRequest;
 import se.nylander.webscraper.model.response.SocketResponse;
 import se.nylander.webscraper.model.response.TradeItemResponse;
@@ -30,13 +31,14 @@ public class TradeItemServiceImp implements TradeItemService {
 
             tradeItems.get().stream().forEach(tradeItem -> {
                 TradeItemResponse response = new TradeItemResponse();
+
                 response.setBase(tradeItem.getBase());
                 response.setType(tradeItem.getType());
                 response.setpDps(tradeItem.getpDps());
                 response.seteDps(tradeItem.geteDps());
                 response.setProperties(extractProperties(tradeItem.getProperty(), tradeItem.getType()));
                 response.setRequirements(extractRequirements(tradeItem.getRequirement()));
-                response.setMods(convertModsToString(tradeItem.getMod()));
+                response.setMods(convertModsToString(tradeItem.getMod(), request.getMods()));
                 response.setShopOwner(tradeItem.getShopOwner());
                 response.setPrice(tradeItem.getPrice());
                 response.setIcon(tradeItem.getIcon());
@@ -101,15 +103,31 @@ public class TradeItemServiceImp implements TradeItemService {
         return map;
     }
 
-    private List<String> convertModsToString(Set<Mod> mods) {
-        List<String> stringMods = new ArrayList<>();
+    private HashMap<String, Boolean> convertModsToString(Set<Mod> mods, List<ModRequest> modRequests) {
+        HashMap<String, Boolean> stringMods = new HashMap<>();
+
         for (Mod mod : mods) {
+            Boolean highlight = modRequests.stream()
+                    .anyMatch(request -> request.getName().equalsIgnoreCase(mod.getModName()));
+
             String modText = mod.getModName();
-            if (mod.getMiniValue() != null && mod.getMaxiValue() != null) {
+
+            if (mod.getMiniValue() != null) {
                 modText = modText.replaceFirst("#", mod.getMiniValue().toString().replace(".0", ""));
-                modText = modText.replaceFirst("#", mod.getMaxiValue().toString().replace(".0", ""));
+                if(mod.getMiniValue() < 0){
+                    modText = modText.replaceFirst("-", "");
+                }
             }
-            stringMods.add(modText);
+
+            if (mod.getMaxiValue() != null) {
+                modText = modText.replaceFirst("#", mod.getMaxiValue().toString().replace(".0", ""));
+                if(mod.getMaxiValue() < 0 && (!Objects.equals(mod.getMiniValue(), mod.getMaxiValue()))){
+                    modText = modText.replaceFirst("-", "");
+                }
+            }
+
+
+            stringMods.put(modText, highlight);
         }
         return stringMods;
     }

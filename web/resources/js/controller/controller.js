@@ -383,4 +383,12 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
 
     };
 
+    $scope.formatDps = function(i) {
+        if(i != null){
+            return Math.round(i * 100)/100;
+        }else{
+            return 0;
+        }
+    }
+
 }]);

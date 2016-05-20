@@ -70,7 +70,8 @@ public class JsonParser {
             tradeItem.setName(parseName(object));
             tradeItem.setVerified(object.getBoolean(ScraperConstants.ITEM_VERIFIED));
             tradeItem = parseProperties(object, tradeItem);
-            tradeItem = parseMods(object, tradeItem);
+            tradeItem = !tradeItem.getType().equalsIgnoreCase("Divination Card") ?
+                        parseMods(object, tradeItem) : tradeItem;
 
             tradeItem = parseRequirments(object, tradeItem);
             tradeItem = parseSockets(object, tradeItem);
@@ -316,7 +317,7 @@ public class JsonParser {
             );
 
             //Ta bort nummer för att göra mod-namnet generiskt
-            modName = modName.replaceAll("(\\d+)", "#");
+            modName = modName.replaceAll("(\\d*\\.?\\d+)", "#");
             final Mod currentMod = new Mod(modName, optionalMinValue.isPresent()
                     ? optionalMinValue.get() : null
                     , optionalMaxValue.isPresent()

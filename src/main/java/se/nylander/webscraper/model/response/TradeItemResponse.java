@@ -21,7 +21,7 @@ public class TradeItemResponse {
     private Boolean identified;
     private Integer ilvl;
     private Integer rarity;
-    private List<String> mods;
+    private HashMap<String, Boolean> mods;
     private HashMap<String, String> properties;
     private HashMap<String, Integer> requirements;
     private List<SocketResponse> sockets;
@@ -90,11 +90,11 @@ public class TradeItemResponse {
         this.eDps = eDps;
     }
 
-    public List<String> getMods() {
+    public HashMap<String, Boolean> getMods() {
         return mods;
     }
 
-    public void setMods(List<String> mods) {
+    public void setMods(HashMap<String, Boolean> mods) {
         this.mods = mods;
     }
 

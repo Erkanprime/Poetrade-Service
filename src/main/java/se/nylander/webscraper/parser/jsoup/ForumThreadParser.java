@@ -53,20 +53,19 @@ public class ForumThreadParser {
             Elements tableTitles = htmlBody.getElementById("view_forum_table").select("tr");
 
 
-            List<String> threads = tableTitles.stream()
+            return tableTitles.stream()
                     .filter(tr -> !tr.select("div.sticky.off").isEmpty())
                     .map(title -> title.select("div.title").get(0).child(0).attributes().get("href"))
                     .collect(Collectors.toList());
-            return threads;
         } catch (IOException e) {
             throw e;
         }
 
     }
 
-    public Shop readForumLinksShops(String href) throws Exception {
+    public void readForumLinksShops(String href) throws Exception {
         String dirtyJson;
-        Document htmlBody = null;
+        Document htmlBody;
         try {
             htmlBody = DocUtil.getDocument(href);
 
@@ -103,7 +102,6 @@ public class ForumThreadParser {
         currentShop.setTradeItems(mapItemPrices(htmlBody, tradeItems));
 
         shopService.saveOrUpdate(currentShop);
-        return currentShop;
     }
 
     private Shop extractShopMetaInfo(Document htmlBody) {
@@ -121,7 +119,7 @@ public class ForumThreadParser {
 
         List<Node> nodes = htmlbody.select("div.content").first().childNodes();
         Integer lastRead = null;
-        String price = null;
+        String price;
 
         for (Node node : nodes) {
 

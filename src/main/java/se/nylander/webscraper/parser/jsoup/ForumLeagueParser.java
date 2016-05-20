@@ -70,7 +70,6 @@ public class ForumLeagueParser {
             return;
         }
 
-        List<Shop> indexedShops = new ArrayList<>();
         List<String> shopLinks = new ArrayList<>();
 
 
@@ -103,7 +102,7 @@ public class ForumLeagueParser {
                         log.info("###### Parsing forum thread: " + shopLink + " ######");
                         try {
 
-                            indexedShops.add(forumThreadParser.readForumLinksShops(shopLink));
+                            forumThreadParser.readForumLinksShops(shopLink);
 
                         } catch (Exception e) {
                             log.warn("Couldent parse/connect to Thread: " + ScraperConstants.URL + shopLink + "\n" + e.getLocalizedMessage());

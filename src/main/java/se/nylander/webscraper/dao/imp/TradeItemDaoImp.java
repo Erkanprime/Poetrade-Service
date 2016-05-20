@@ -11,6 +11,7 @@ import se.nylander.webscraper.model.request.TradeItemRequest;
 
 import javax.persistence.*;
 import javax.persistence.criteria.*;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,8 @@ public class TradeItemDaoImp implements TradeItemDao{
 
     private static final Double defaultMin = 0d;
     private static final Double defaultMax = 10000d;
-
+    private static final List<String> genericOne = Arrays.asList("Claw","Dagger","One Hand Axe","One Hand Sword","One Hand Mace","Sceptre","Wand");
+    private static final List<String> genericTwo = Arrays.asList("Bow", "Staff", "Two Hand Axe", "Two Hand Sword", "Two Hand Mace");
 
     @PersistenceContext
     private EntityManager em;
@@ -48,7 +50,14 @@ public class TradeItemDaoImp implements TradeItemDao{
 
 
         if(request.getType() != null){
-            predicates.add(criteriaBuilder.equal(root.get("type"), request.getType()));
+            if(request.getType().equalsIgnoreCase("Generic One-Handed Weapon")){
+                predicates.add(root.get("type").in(genericOne));
+            }else
+            if(request.getType().equalsIgnoreCase("Generic Two-Handed Weapon")){
+                predicates.add(root.get("type").in(genericTwo));
+            }else {
+                predicates.add(criteriaBuilder.equal(root.get("type"), request.getType()));
+            }
         }
 
         if(request.getBase() != null) {
@@ -173,7 +182,7 @@ public class TradeItemDaoImp implements TradeItemDao{
 
         return Optional.of(typedQuery
                 .setFirstResult(0)
-                .setMaxResults(50)
+                .setMaxResults(99)
                 .getResultList()
         );
 

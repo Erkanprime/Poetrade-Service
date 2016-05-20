@@ -44,7 +44,7 @@ hr{
     border-color: azure;
 }
 body {
-    background-image: url("poebackground.jpg");
+    background-image: url("../images/poebackground.jpg");
     font-family: "HelveticaNeueLT Pro 55 Roman";
 }
 h3 {
@@ -116,32 +116,32 @@ h3 {
     color:#1ba29b;
 }
 .socketInt{
-    background-image: url("socketInt.png");
+    background-image: url("../images/socketInt.png");
     width: 47px;
     height: 47px;
 }
 .socketDex{
-    background-image: url("socketDex.png");
+    background-image: url("../images/socketDex.png");
     width: 47px;
     height: 47px;
 }
 .socketStr{
-    background-image: url("socketStr.png");
+    background-image: url("../images/socketStr.png");
     width: 47px;
     height: 47px;
 }
 .socketCor{
-    background-image: url("socketCor.png");
+    background-image: url("../images/socketCor.png");
     width: 47px;
     height: 47px;
 }
 .linkHori{
-    background-image: url("linkHorizontal.png");
+    background-image: url("../images/linkHorizontal.png");
     width: 38px;
     height: 16px;
 }
 .linkVerti{
-    background-image: url("linkVertical.png");
+    background-image: url("../images/linkVertical.png");
     width: 16px;
     height: 38px;
 }
@@ -231,4 +231,46 @@ h3 {
     overflow: auto;
     min-width: 500px;
     margin-left: 5%;
+}
+
+
+
+
+
+.example-animate-container {
+    background:white;
+    border:1px solid black;
+    list-style:none;
+    margin:0;
+    padding:0 10px;
+}
+
+.animate-repeat {
+    line-height:40px;
+    list-style:none;
+    box-sizing:border-box;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+    opacity:0;
+    max-height:0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+    opacity:1;
+    max-height:40px;
+}
+.highlight{
+    text-shadow: 0px 0px 20px white, 0 0 10px white;
 }
