@@ -230,13 +230,4 @@ public class ForumThreadParser {
         return tradeItems;
     }
 
-    /*
-    public static void main(String[] args) throws Exception {
-
-        ForumThreadParser parser = new ForumThreadParser();
-        parser.readForumLinksShops("/forum/view-thread/1659933");
-    }
-    */
-
-
 }

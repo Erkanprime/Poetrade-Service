@@ -342,9 +342,11 @@
     </div>
 
 </div>
-
 <div class="container" id="fetchedItems">
 
+    <div ng-show="searchFlag" class="resultPanel ng-hide panel-heading col-lg-12">
+        <h3>Found {{tradeitemResponse.length}} items</h3>
+    </div>
     <table class="col-lg-12">
         <tr class="resultRow animate-repeat" ng-repeat="response in tradeitemResponse">
             <td class="iconCell col-lg-2">
@@ -372,20 +374,15 @@
                 <h3>Itemlevel: {{response.ilvl}}</h3>
             </td>
             <td class="statsCell col-lg-4">
-                <div style="display:inline-block;vertical-align:top;">
-                    <h2>Physical Damage: {{formatDps(response.pDps)}}</h2>
-                    <h2>Elemental Damage : {{formatDps(response.eDps)}}</h2>
-                </div>
-                <div>
+                    <h2>Phys Dps: {{formatDps(response.pDps)}}</h2>
+                    <h2>Ele Dps : {{formatDps(response.eDps)}}</h2>
                     <hr>
                     <p ng-repeat="(key,val) in response.properties"> {{key}}{{val=='' ? ' ' : ':'}} {{val}}</p>
                     <p> {{response.base}}</p>
-                </div>
-                <div>
                     <hr>
                     <h3>Price: {{response.price}}</h3>
                     <h3>Owner: {{response.shopOwner}}</h3>
-                </div>
+
             </td>
         </tr>
     </table>

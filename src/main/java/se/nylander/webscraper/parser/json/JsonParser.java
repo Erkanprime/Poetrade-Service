@@ -37,7 +37,6 @@ public class JsonParser {
 
         for (int i = 0; i < arr.length(); i++) {
 
-            // Ta bort dom första hak-lådorna
             try {
                 String base = arr.get(i).toString();
 
@@ -84,7 +83,6 @@ public class JsonParser {
         return tradeItems;
     }
 
-    // Check if typeline contains >>
     private static String parseTypeLine(JSONObject object) {
         Optional<String> type = Optional.ofNullable(object.optString(ScraperConstants.ITEM_TYPE));
 
@@ -94,7 +92,6 @@ public class JsonParser {
                 type.get().substring(matcher.start(), matcher.end()) : null;
     }
 
-    // Check if name is empty or contains >>, if yes it returns typeline
     private static String parseName(JSONObject object) {
         Optional<String> name = Optional.ofNullable(object.optString(ScraperConstants.ITEM_NAME));
 

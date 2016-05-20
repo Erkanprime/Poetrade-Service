@@ -3,7 +3,7 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
     $scope.formFlag=true;
     $scope.tradeitemResponse=[];
     $scope.tradeitemCopy={};
-
+    $scope.searchFlag = false;
     $scope.userLogin ={
         username:null,
         password:null
@@ -129,6 +129,7 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
         PoeService.search($scope.tradeitemCopy)
             .then(
                 function(d) {
+                    $scope.searchFlag = true;
                     $scope.tradeitemResponse = d;
                     console.log($scope.tradeitemResponse);
                     $scope.formFlag = false;
@@ -251,14 +252,6 @@ App.controller('FormController', ['$scope', 'PoeService', function($scope, PoeSe
 
 
     };
-
-    $scope.showObject= function(){
-        
-        $scope.prepareTradeItem();
-        console.log($scope.tradeitemCopy);
-        $scope.tradeitemCopy = {};
-    };
-
 
     $scope.hideForm = function () {
         $scope.formFlag = false;
