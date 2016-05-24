@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.util.StringUtils;
 import se.nylander.webscraper.exception.JavascriptJsonFormatException;
+import se.nylander.webscraper.exception.UnknownBaseTypeException;
 import se.nylander.webscraper.model.*;
 import se.nylander.webscraper.util.ScraperConstants;
 import se.nylander.webscraper.util.TypeBaseUtil;
@@ -69,8 +70,9 @@ public class JsonParser {
             tradeItem.setName(parseName(object));
             tradeItem.setVerified(object.getBoolean(ScraperConstants.ITEM_VERIFIED));
             tradeItem = parseProperties(object, tradeItem);
+
             tradeItem = !tradeItem.getType().equalsIgnoreCase("Divination Card") ?
-                        parseMods(object, tradeItem) : tradeItem;
+                   parseMods(object, tradeItem) : tradeItem;
 
             tradeItem = parseRequirments(object, tradeItem);
             tradeItem = parseSockets(object, tradeItem);
@@ -348,12 +350,18 @@ public class JsonParser {
 
     private static TradeItem parseBaseType(TradeItem tradeItem, JSONObject object) {
         Optional<String> typeLine = Optional.ofNullable(object.optString(ScraperConstants.ITEM_TYPE));
+        if(typeLine.isPresent()){
+            Optional<String> type = TypeBaseUtil.getType(typeLine.get());
+            Optional<String> base = TypeBaseUtil.getBase(typeLine.get());
 
-        Optional<String> type = TypeBaseUtil.getType(typeLine.get());
-        Optional<String> base = TypeBaseUtil.getBase(typeLine.get());
+            if(!base.isPresent() || !type.isPresent()){
+                throw new UnknownBaseTypeException("Did not find base/type for typeLine: " + typeLine.get());
+            }
 
-        tradeItem.setType(type.isPresent() ? type.get() : null);
-        tradeItem.setBase(base.isPresent() ? base.get() : null);
+            tradeItem.setType(type.isPresent() ? type.get() : null);
+            tradeItem.setBase(base.isPresent() ? base.get() : null);
+
+        }
 
         return tradeItem;
     }

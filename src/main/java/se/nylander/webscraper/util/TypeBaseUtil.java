@@ -208,7 +208,8 @@ public enum TypeBaseUtil {
             "The Sun", "The Surgeon", "The Surveyor", "The Survivalist", "The Thaumaturgist", "The Tower", "The Traitor", "The Trial",
             "The Twins", "The Union", "The Vast", "The Warden", "The Warlord", "The Watcher", "The Wind", "The Wolf's Shadow", "The Wrath",
             "Three Faces in the Dark", "Time-Lost Relic", "Tranquillity", "Treasure Hunter", "Turn the Other Cheek", "Vinia's Token",
-            "Volatile Power", "Wealth and Power","Destined to Crumble"
+            "Volatile Power", "Wealth and Power","Destined to Crumble", "Dying Anguish", "Shard of Fate", "Thunderous Skies", "The Throne",
+            "Rain Tempter"
 
     }),
 
@@ -305,7 +306,7 @@ public enum TypeBaseUtil {
             "Chaos Orb", "Chromatic Orb", "Divine Orb", "Eternal Orb", "Exalted Orb", "Gemcutter's Prism",
             "Glassblower's Bauble", "Jeweller's Orb", "Mirror of Kalandra", "Orb of Alchemy", "Orb of Alteration", "Orb of Augmentation",
             "Orb of Chance", "Orb of Fusing", "Orb of Regret", "Orb of Scouring", "Orb of Transmutation", "Perandus Coin", "Portal Scroll",
-            "Regal Orb", "Scroll of Wisdom", "Vaal Orb"
+            "Regal Orb", "Scroll of Wisdom", "Vaal Orb", "Scroll Fragment", "Alteration Shard", "Transmutation Shard", "Alchemy Shard"
     }),
     FishingRod("Fishing Rod", new String[] {
        "Song of the Sirens"

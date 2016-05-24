@@ -48,7 +48,7 @@ public class ForumLeagueParser {
             final Elements forumLinksElements = doc.getElementsByClass("forum_name").select("div.name");
 
             forumLinksElements.stream()
-                    .filter(name -> name.text().contains("Shops") || name.text().contains("Two-Week"))
+                    .filter(name -> name.text().contains("Shops"))
                     .forEach(link -> {
                         String name = link.text();
                         String href = link.getElementsByAttribute("href").get(0).attributes().get("href");
@@ -105,7 +105,7 @@ public class ForumLeagueParser {
                             forumThreadParser.readForumLinksShops(shopLink);
 
                         } catch (Exception e) {
-                            log.warn("Couldent parse/connect to Thread: " + ScraperConstants.URL + shopLink + "\n" + e.getMessage());
+                            log.warn("Couldent parse/connect to Thread: " + ScraperConstants.URL + shopLink + "\n", e);
                         }
                     }
 

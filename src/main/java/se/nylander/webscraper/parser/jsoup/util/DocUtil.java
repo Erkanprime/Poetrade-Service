@@ -19,13 +19,13 @@ public class DocUtil {
 
     public static Document getDocument(String url) throws IOException{
         // Vänta så inte
-        /*
+
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        */
+
         return Jsoup
                 .connect(ScraperConstants.URL + url)
                 .timeout(TIMEOUT)
