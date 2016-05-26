@@ -104,7 +104,7 @@ public class TradeItemServiceImp implements TradeItemService {
     }
 
     private HashMap<String, Boolean> convertModsToString(Set<Mod> mods, List<ModRequest> modRequests) {
-        HashMap<String, Boolean> stringMods = new HashMap<>();
+        LinkedHashMap<String, Boolean> stringMods = new LinkedHashMap<>();
 
         for (Mod mod : mods) {
             Boolean highlight = modRequests.stream()
@@ -125,7 +125,6 @@ public class TradeItemServiceImp implements TradeItemService {
                     modText = modText.replaceFirst("-", "");
                 }
             }
-
 
             stringMods.put(modText, highlight);
         }

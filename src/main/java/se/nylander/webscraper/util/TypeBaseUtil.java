@@ -209,7 +209,7 @@ public enum TypeBaseUtil {
             "The Twins", "The Union", "The Vast", "The Warden", "The Warlord", "The Watcher", "The Wind", "The Wolf's Shadow", "The Wrath",
             "Three Faces in the Dark", "Time-Lost Relic", "Tranquillity", "Treasure Hunter", "Turn the Other Cheek", "Vinia's Token",
             "Volatile Power", "Wealth and Power","Destined to Crumble", "Dying Anguish", "Shard of Fate", "Thunderous Skies", "The Throne",
-            "Rain Tempter"
+            "Rain Tempter","Boundless Realms", "The Devastator", "The Throne", "Heterochromia", "The Immortal"
 
     }),
 

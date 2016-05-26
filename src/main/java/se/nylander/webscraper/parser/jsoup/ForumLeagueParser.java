@@ -105,7 +105,7 @@ public class ForumLeagueParser {
                             forumThreadParser.readForumLinksShops(shopLink);
 
                         } catch (Exception e) {
-                            log.warn("Couldent parse/connect to Thread: " + ScraperConstants.URL + shopLink + "\n", e);
+                            log.warn("Couldent parse/connect to Thread: " + ScraperConstants.URL + shopLink + "\n" + e.getMessage());
                         }
                     }
 
