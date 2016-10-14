@@ -9,3 +9,5 @@ I.o.m att spelet inte har något publikt Api(detta har senare implementerats?) s
 
 Detta gör jag genom ett schemalagt spring job som läser in alla uppdaterade shopsen och sparar ner dem till en databas.
 Sedan har jag ett Gui byggt med Angular där jag presenterar ett dynamiskt formulär där man kan göra avancerade sökningar via ett forumulär.
+
+Problem som dykt upp/tagit tid har varit parsningen av Jsondatat som jag läser in via webbskrapningen. Datat är ibland inkonsistent och svårt att förstå så en stor del av projektet har varit att försöka nå 100% korrekt inläsning av data.
