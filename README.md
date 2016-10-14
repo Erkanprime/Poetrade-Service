@@ -11,3 +11,5 @@ Detta gör jag genom ett schemalagt spring job som läser in alla uppdaterade sh
 Sedan har jag ett Gui byggt med Angular där jag presenterar ett dynamiskt formulär där man kan göra avancerade sökningar via ett forumulär.
 
 Problem som dykt upp/tagit tid har varit parsningen av Jsondatat som jag läser in via webbskrapningen. Datat är ibland inkonsistent och svårt att förstå så en stor del av projektet har varit att försöka nå 100% korrekt inläsning av data.
+
+Det har varit mycket trial & error i det här projektet och jag har varit tvungen att hitta egna lösningar på problem då det här är en dåligt dokumenterad genre inom java.
